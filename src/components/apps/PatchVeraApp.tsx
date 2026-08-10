@@ -23,14 +23,14 @@ export function PatchVeraApp() {
               "radial-gradient(circle at 80% 20%, rgba(232,160,74,0.35), transparent 45%), radial-gradient(circle at 10% 90%, rgba(107,191,138,0.25), transparent 40%)",
           }}
         />
-        <p className="relative font-mono text-[10px] tracking-widest text-[var(--vos-dim)] uppercase">
-          system update utility
+        <p className="relative text-[10px] tracking-widest text-[var(--vos-rose)] uppercase">
+          Mise à jour majeure
         </p>
         <h2 className="relative mt-1 font-[family-name:var(--font-instrument)] text-3xl text-[var(--vos-text)]">
           {veraPatch.codename}
         </h2>
-        <p className="relative mt-1 font-mono text-xs text-[var(--vos-amber)]">
-          v{veraPatch.version} · applied {veraPatch.appliedAt}
+        <p className="relative mt-1 text-xs text-[var(--vos-amber)]">
+          v{veraPatch.version} · {veraPatch.appliedAt}
         </p>
         <div className="relative mt-4 h-1.5 overflow-hidden rounded-full bg-[var(--vos-bg)]">
           <div

@@ -6,7 +6,6 @@ import { PatchVeraApp } from "@/components/apps/PatchVeraApp";
 import { NetworkMapApp } from "@/components/apps/NetworkMapApp";
 import { MetricsApp } from "@/components/apps/MetricsApp";
 import { LabApp } from "@/components/apps/LabApp";
-import { VictorBotApp } from "@/components/apps/VictorBotApp";
 
 export function AppContent({ id }: { id: AppId }) {
   switch (id) {
@@ -20,8 +19,6 @@ export function AppContent({ id }: { id: AppId }) {
       return <MetricsApp />;
     case "lab":
       return <LabApp />;
-    case "bot":
-      return <VictorBotApp />;
     default:
       return null;
   }

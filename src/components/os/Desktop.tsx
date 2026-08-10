@@ -3,15 +3,18 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import { DesktopProvider, useDesktop } from "./DesktopContext";
+import { ThemeProvider } from "./ThemeProvider";
 import { MenuBar } from "./MenuBar";
 import { Dock } from "./Dock";
 import { WindowFrame } from "./WindowFrame";
 import { MobileLauncher } from "./MobileLauncher";
 import { BootSequence } from "./BootSequence";
+import { WallpaperArt } from "./WallpaperArt";
+import { BotCompanion } from "./BotCompanion";
 import { AppContent } from "@/components/apps/AppContent";
-import type { AppId } from "@/content/types";
+import type { AppId, ThemeMode } from "@/content/types";
 
-const APP_IDS: AppId[] = ["career", "vera", "travel", "metrics", "lab", "bot"];
+const APP_IDS: AppId[] = ["career", "vera", "travel", "metrics", "lab"];
 
 function DesktopInner() {
   const { setIsMobile, isMobile, openApp } = useDesktop();
@@ -27,9 +30,7 @@ function DesktopInner() {
 
   return (
     <div className="vos-wallpaper vos-grain relative h-dvh w-full overflow-hidden">
-      <div className="vos-grid-overlay pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute top-[18%] left-[12%] h-40 w-40 rounded-full bg-[var(--vos-amber)]/10 blur-3xl vos-uptime-pulse" />
-      <div className="pointer-events-none absolute right-[10%] bottom-[22%] h-52 w-52 rounded-full bg-[var(--vos-copper)]/10 blur-3xl" />
+      <WallpaperArt />
 
       {!booted && <BootSequence onDone={() => setBooted(true)} />}
 
@@ -43,26 +44,24 @@ function DesktopInner() {
         <div className="relative min-h-0 flex-1">
           {!isMobile && (
             <>
-              {/* Desktop icons */}
-              <div className="absolute top-6 left-5 z-10 flex flex-col gap-4">
+              <div className="absolute top-6 left-5 z-10 flex flex-col gap-3">
                 {(
                   [
-                    ["career", "Career"],
-                    ["bot", "VictorBot"],
-                    ["travel", "Map"],
+                    ["career", "Pro", "✦"],
+                    ["vera", "Vera", "♥"],
+                    ["travel", "Voyages", "✈"],
                   ] as const
-                ).map(([id, label]) => (
+                ).map(([id, label, icon]) => (
                   <button
                     key={id}
                     type="button"
-                    onDoubleClick={() => openApp(id)}
                     onClick={() => openApp(id)}
-                    className="group flex w-20 flex-col items-center gap-1 rounded-lg p-2 hover:bg-white/5"
+                    className="group flex w-20 flex-col items-center gap-1 rounded-xl p-2 hover:bg-white/10"
                   >
-                    <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-[var(--vos-border)] bg-[var(--vos-panel)]/80 font-mono text-lg text-[var(--vos-amber)] shadow-lg">
-                      {id === "career" ? "⌘" : id === "bot" ? "⟩" : "◎"}
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--vos-border)] bg-[var(--vos-panel)]/70 text-xl text-[var(--vos-rose)] shadow-md backdrop-blur-sm">
+                      {icon}
                     </span>
-                    <span className="text-center font-mono text-[10px] text-[var(--vos-muted)] group-hover:text-[var(--vos-text)]">
+                    <span className="text-center text-[11px] text-[var(--vos-muted)] group-hover:text-[var(--vos-text)]">
                       {label}
                     </span>
                   </button>
@@ -70,12 +69,12 @@ function DesktopInner() {
               </div>
 
               <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                <div className="pointer-events-none select-none text-center opacity-[0.07]">
-                  <p className="font-[family-name:var(--font-instrument)] text-7xl text-[var(--vos-text)] md:text-8xl">
-                    VictorOS
+                <div className="pointer-events-none select-none text-center opacity-[0.12]">
+                  <p className="font-[family-name:var(--font-instrument)] text-6xl text-[var(--vos-text)] md:text-7xl">
+                    Retrouvailles
                   </p>
-                  <p className="mt-2 font-mono text-sm tracking-[0.35em] text-[var(--vos-text)] uppercase">
-                    2026.08
+                  <p className="mt-2 text-sm tracking-[0.25em] text-[var(--vos-text)] uppercase">
+                    Été 2026
                   </p>
                 </div>
               </div>
@@ -94,15 +93,18 @@ function DesktopInner() {
         </div>
 
         <Dock />
+        <BotCompanion />
       </div>
     </div>
   );
 }
 
-export function Desktop() {
+export function Desktop({ initialTheme = "dark" }: { initialTheme?: ThemeMode }) {
   return (
-    <DesktopProvider>
-      <DesktopInner />
-    </DesktopProvider>
+    <ThemeProvider initialTheme={initialTheme}>
+      <DesktopProvider>
+        <DesktopInner />
+      </DesktopProvider>
+    </ThemeProvider>
   );
 }

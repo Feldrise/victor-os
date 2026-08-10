@@ -85,11 +85,11 @@ export function MetricsApp() {
   return (
     <div className="flex h-full flex-col">
       <div className="border-b border-[var(--vos-border)] bg-[var(--vos-panel)] px-5 py-4">
-        <p className="font-mono text-[10px] tracking-widest text-[var(--vos-dim)] uppercase">
-          monitoring · faux-grafana
+        <p className="text-[10px] tracking-widest text-[var(--vos-rose)] uppercase">
+          Passions
         </p>
         <h2 className="font-[family-name:var(--font-instrument)] text-2xl text-[var(--vos-text)]">
-          Physical & mental metrics
+          Ce qui fait battre le cœur
         </h2>
       </div>
 

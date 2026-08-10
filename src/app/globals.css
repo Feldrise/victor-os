@@ -1,25 +1,70 @@
 @import "tailwindcss";
 
-:root {
-  --vos-bg: #12141a;
-  --vos-bg-elevated: #1a1d26;
-  --vos-bg-window: #161922;
-  --vos-bg-panel: #1e222d;
-  --vos-border: #2c3140;
-  --vos-border-subtle: #252a36;
-  --vos-amber: #e8a04a;
-  --vos-amber-dim: #b87a2e;
-  --vos-copper: #c4784a;
-  --vos-copper-bright: #e8956a;
-  --vos-text: #e8e4dc;
-  --vos-text-muted: #8b91a0;
-  --vos-text-dim: #5c6372;
-  --vos-success: #6bbf8a;
-  --vos-danger: #d46a6a;
-  --vos-info: #7a9ec4;
-  --vos-deprecated: #8b7355;
-  --vos-grid: rgba(232, 160, 74, 0.04);
-  --vos-glow: rgba(232, 160, 74, 0.15);
+/* Dark — nuit améthyste, violet sensuel + or chaud */
+:root,
+[data-theme="dark"] {
+  --vos-bg: #120e1a;
+  --vos-bg-elevated: #1c1628;
+  --vos-bg-window: rgba(28, 22, 40, 0.94);
+  --vos-bg-panel: #261e36;
+  --vos-border: rgba(186, 160, 230, 0.2);
+  --vos-border-subtle: rgba(186, 160, 230, 0.1);
+  --vos-amber: #e0b878;
+  --vos-amber-dim: #c09450;
+  --vos-copper: #c9a06a;
+  --vos-copper-bright: #e0bc88;
+  --vos-rose: #b894f0;
+  --vos-blush: #d4c0f8;
+  --vos-text: #f2ecf8;
+  --vos-text-muted: #a898b8;
+  --vos-text-dim: #6e6280;
+  --vos-success: #8bc4a0;
+  --vos-danger: #e08090;
+  --vos-info: #9ab0d8;
+  --vos-deprecated: #9880a0;
+  --vos-grid: rgba(184, 148, 240, 0.05);
+  --vos-glow: rgba(184, 148, 240, 0.22);
+  --vos-menubar: rgba(18, 14, 26, 0.75);
+  --vos-dock: rgba(28, 22, 40, 0.8);
+  --vos-wallpaper-a: #1e1430;
+  --vos-wallpaper-b: #120e1a;
+  --vos-wallpaper-c: #3a2460;
+  --vos-silhouette: rgba(212, 192, 248, 0.22);
+  --vos-silhouette-deep: rgba(120, 70, 180, 0.4);
+  --background: var(--vos-bg);
+  --foreground: var(--vos-text);
+}
+
+/* Light — lavande douce, encre prune */
+[data-theme="light"] {
+  --vos-bg: #f3eef8;
+  --vos-bg-elevated: #fbf8fe;
+  --vos-bg-window: rgba(251, 248, 254, 0.94);
+  --vos-bg-panel: #ebe3f4;
+  --vos-border: rgba(90, 60, 140, 0.16);
+  --vos-border-subtle: rgba(90, 60, 140, 0.08);
+  --vos-amber: #b8864a;
+  --vos-amber-dim: #966c38;
+  --vos-copper: #a87850;
+  --vos-copper-bright: #c49468;
+  --vos-rose: #7a52c4;
+  --vos-blush: #b090e0;
+  --vos-text: #1e1630;
+  --vos-text-muted: #5c4e72;
+  --vos-text-dim: #8a7c9c;
+  --vos-success: #3e8864;
+  --vos-danger: #c04858;
+  --vos-info: #506890;
+  --vos-deprecated: #7a6888;
+  --vos-grid: rgba(122, 82, 196, 0.06);
+  --vos-glow: rgba(122, 82, 196, 0.14);
+  --vos-menubar: rgba(251, 248, 254, 0.8);
+  --vos-dock: rgba(251, 248, 254, 0.85);
+  --vos-wallpaper-a: #e4d8f4;
+  --vos-wallpaper-b: #f3eef8;
+  --vos-wallpaper-c: #d0bcec;
+  --vos-silhouette: rgba(100, 60, 160, 0.14);
+  --vos-silhouette-deep: rgba(80, 40, 140, 0.22);
   --background: var(--vos-bg);
   --foreground: var(--vos-text);
 }
@@ -34,6 +79,8 @@
   --color-vos-border: var(--vos-border);
   --color-vos-amber: var(--vos-amber);
   --color-vos-copper: var(--vos-copper);
+  --color-vos-rose: var(--vos-rose);
+  --color-vos-blush: var(--vos-blush);
   --color-vos-text: var(--vos-text);
   --color-vos-muted: var(--vos-text-muted);
   --color-vos-dim: var(--vos-text-dim);
@@ -60,26 +107,20 @@ body {
   color: var(--vos-text);
   font-family: var(--font-ibm-plex-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 ::selection {
-  background: rgba(232, 160, 74, 0.35);
+  background: color-mix(in srgb, var(--vos-rose) 40%, transparent);
   color: var(--vos-text);
 }
 
-/* Wallpaper atmosphere */
 .vos-wallpaper {
   background:
-    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(196, 120, 74, 0.12), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 85% 80%, rgba(232, 160, 74, 0.08), transparent 50%),
-    linear-gradient(180deg, #151820 0%, #0e1016 100%);
-}
-
-.vos-grid-overlay {
-  background-image:
-    linear-gradient(var(--vos-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--vos-grid) 1px, transparent 1px);
-  background-size: 48px 48px;
+    radial-gradient(ellipse 70% 55% at 75% 30%, var(--vos-wallpaper-c), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 15% 70%, color-mix(in srgb, var(--vos-rose) 25%, transparent), transparent 50%),
+    linear-gradient(165deg, var(--vos-wallpaper-a) 0%, var(--vos-wallpaper-b) 55%, var(--vos-bg) 100%);
+  transition: background 0.4s ease;
 }
 
 .vos-grain::after {
@@ -87,23 +128,37 @@ body {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.045;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
+  mix-blend-mode: soft-light;
 }
 
-.vos-uptime-pulse {
-  animation: vos-pulse 4s ease-in-out infinite;
+.vos-float {
+  animation: vos-float 8s ease-in-out infinite;
+}
+
+@keyframes vos-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes vos-pulse {
   0%,
   100% {
-    opacity: 0.35;
+    opacity: 0.4;
   }
   50% {
-    opacity: 0.7;
+    opacity: 0.85;
   }
+}
+
+.vos-uptime-pulse {
+  animation: vos-pulse 4s ease-in-out infinite;
 }
 
 @keyframes vos-blink {
@@ -121,7 +176,6 @@ body {
   animation: vos-blink 1s step-end infinite;
 }
 
-/* Scrollbars */
 .vos-scroll::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -140,17 +194,83 @@ body {
   background: var(--vos-text-dim);
 }
 
-/* Window chrome */
 .vos-window-shadow {
   box-shadow:
-    0 0 0 1px rgba(44, 49, 64, 0.9),
-    0 24px 64px rgba(0, 0, 0, 0.45),
-    0 0 40px var(--vos-glow);
+    0 0 0 1px var(--vos-border),
+    0 20px 50px rgba(40, 20, 30, 0.28),
+    0 0 32px var(--vos-glow);
 }
 
 .vos-dock-glass {
-  background: rgba(22, 25, 34, 0.82);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(44, 49, 64, 0.9);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  background: var(--vos-dock);
+  backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid var(--vos-border);
+  box-shadow: 0 10px 36px rgba(40, 20, 30, 0.22);
+}
+
+.vos-menubar-glass {
+  background: var(--vos-menubar);
+  backdrop-filter: blur(16px) saturate(1.15);
+}
+
+.vos-resize-handle {
+  position: absolute;
+  z-index: 20;
+}
+
+.vos-resize-n {
+  top: 0;
+  left: 8px;
+  right: 8px;
+  height: 6px;
+  cursor: ns-resize;
+}
+.vos-resize-s {
+  bottom: 0;
+  left: 8px;
+  right: 8px;
+  height: 6px;
+  cursor: ns-resize;
+}
+.vos-resize-e {
+  top: 8px;
+  right: 0;
+  bottom: 8px;
+  width: 6px;
+  cursor: ew-resize;
+}
+.vos-resize-w {
+  top: 8px;
+  left: 0;
+  bottom: 8px;
+  width: 6px;
+  cursor: ew-resize;
+}
+.vos-resize-ne {
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  cursor: nesw-resize;
+}
+.vos-resize-nw {
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  cursor: nwse-resize;
+}
+.vos-resize-se {
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  cursor: nwse-resize;
+}
+.vos-resize-sw {
+  bottom: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  cursor: nesw-resize;
 }

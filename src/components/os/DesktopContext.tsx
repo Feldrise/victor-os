@@ -9,28 +9,35 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { APP_BY_ID } from "@/content/apps";
-import type { AppId, WindowState } from "@/content/types";
+import { APP_BY_ID, MIN_WINDOW } from "@/content/apps";
+import type { AppId, ResizeEdge, WindowState } from "@/content/types";
 
 type DesktopContextValue = {
   windows: WindowState[];
   activeId: AppId | null;
   isMobile: boolean;
   mobileApp: AppId | null;
+  botOpen: boolean;
   openApp: (id: AppId) => void;
   closeApp: (id: AppId) => void;
   minimizeApp: (id: AppId) => void;
   focusApp: (id: AppId) => void;
   toggleMaximize: (id: AppId) => void;
   moveWindow: (id: AppId, x: number, y: number) => void;
+  resizeWindow: (
+    id: AppId,
+    next: Pick<WindowState, "x" | "y" | "width" | "height">,
+  ) => void;
   setMobileApp: (id: AppId | null) => void;
   setIsMobile: (v: boolean) => void;
+  setBotOpen: (open: boolean) => void;
+  toggleBot: () => void;
 };
 
 const DesktopContext = createContext<DesktopContextValue | null>(null);
 
 function defaultWindows(): WindowState[] {
-  const ids: AppId[] = ["career", "vera", "travel", "metrics", "lab", "bot"];
+  const ids: AppId[] = ["career", "vera", "travel", "metrics", "lab"];
   return ids.map((id, i) => {
     const meta = APP_BY_ID[id];
     return {
@@ -39,8 +46,8 @@ function defaultWindows(): WindowState[] {
       minimized: false,
       maximized: false,
       zIndex: i + 1,
-      x: 48 + i * 28,
-      y: 56 + i * 24,
+      x: 56 + i * 32,
+      y: 64 + i * 28,
       width: meta.defaultSize.width,
       height: meta.defaultSize.height,
     };
@@ -52,6 +59,7 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
   const [activeId, setActiveId] = useState<AppId | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileApp, setMobileApp] = useState<AppId | null>(null);
+  const [botOpen, setBotOpen] = useState(false);
   const zCounter = useRef(10);
 
   const focusApp = useCallback((id: AppId) => {
@@ -111,32 +119,61 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
+  const resizeWindow = useCallback(
+    (id: AppId, next: Pick<WindowState, "x" | "y" | "width" | "height">) => {
+      setWindows((prev) =>
+        prev.map((w) => {
+          if (w.id !== id) return w;
+          return {
+            ...w,
+            x: Math.max(0, next.x),
+            y: Math.max(36, next.y),
+            width: Math.max(MIN_WINDOW.width, next.width),
+            height: Math.max(MIN_WINDOW.height, next.height),
+          };
+        }),
+      );
+    },
+    [],
+  );
+
+  const toggleBot = useCallback(() => {
+    setBotOpen((o) => !o);
+  }, []);
+
   const value = useMemo(
     () => ({
       windows,
       activeId,
       isMobile,
       mobileApp,
+      botOpen,
       openApp,
       closeApp,
       minimizeApp,
       focusApp,
       toggleMaximize,
       moveWindow,
+      resizeWindow,
       setMobileApp,
       setIsMobile,
+      setBotOpen,
+      toggleBot,
     }),
     [
       windows,
       activeId,
       isMobile,
       mobileApp,
+      botOpen,
       openApp,
       closeApp,
       minimizeApp,
       focusApp,
       toggleMaximize,
       moveWindow,
+      resizeWindow,
+      toggleBot,
     ],
   );
 
@@ -149,4 +186,36 @@ export function useDesktop() {
   const ctx = useContext(DesktopContext);
   if (!ctx) throw new Error("useDesktop must be used within DesktopProvider");
   return ctx;
+}
+
+/** Apply resize from an edge given pointer delta from drag start. */
+export function computeResize(
+  edge: ResizeEdge,
+  start: { x: number; y: number; width: number; height: number },
+  dx: number,
+  dy: number,
+) {
+  let { x, y, width, height } = start;
+
+  if (edge.includes("e")) width = start.width + dx;
+  if (edge.includes("s")) height = start.height + dy;
+  if (edge.includes("w")) {
+    width = start.width - dx;
+    x = start.x + dx;
+  }
+  if (edge.includes("n")) {
+    height = start.height - dy;
+    y = start.y + dy;
+  }
+
+  if (width < MIN_WINDOW.width) {
+    if (edge.includes("w")) x = start.x + start.width - MIN_WINDOW.width;
+    width = MIN_WINDOW.width;
+  }
+  if (height < MIN_WINDOW.height) {
+    if (edge.includes("n")) y = start.y + start.height - MIN_WINDOW.height;
+    height = MIN_WINDOW.height;
+  }
+
+  return { x, y, width, height };
 }

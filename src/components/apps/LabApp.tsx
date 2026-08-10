@@ -16,11 +16,11 @@ export function LabApp() {
   return (
     <div className="flex h-full flex-col font-mono text-xs">
       <div className="border-b border-[var(--vos-border)] bg-[var(--vos-panel)] px-4 py-3">
-        <p className="text-[10px] tracking-widest text-[var(--vos-dim)] uppercase">
-          htop · local lab
+        <p className="text-[10px] tracking-widest text-[var(--vos-rose)] uppercase">
+          En coulisses
         </p>
         <h2 className="font-[family-name:var(--font-instrument)] text-xl text-[var(--vos-text)]">
-          Background processes
+          Projets perso
         </h2>
       </div>
 

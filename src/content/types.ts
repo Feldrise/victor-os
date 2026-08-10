@@ -1,10 +1,6 @@
-export type AppId =
-  | "career"
-  | "vera"
-  | "travel"
-  | "metrics"
-  | "lab"
-  | "bot";
+export type AppId = "career" | "vera" | "travel" | "metrics" | "lab";
+
+export type ThemeMode = "dark" | "light";
 
 export type WindowState = {
   id: AppId;
@@ -26,3 +22,13 @@ export type AppMeta = {
   description: string;
   defaultSize: { width: number; height: number };
 };
+
+export type ResizeEdge =
+  | "n"
+  | "s"
+  | "e"
+  | "w"
+  | "ne"
+  | "nw"
+  | "se"
+  | "sw";

@@ -132,10 +132,10 @@ export function NetworkMapApp() {
     <div className="flex h-full min-h-[420px] flex-col">
       <div className="border-b border-[var(--vos-border)] px-5 py-3">
         <h2 className="font-[family-name:var(--font-instrument)] text-xl text-[var(--vos-text)]">
-          Network traffic
+          Sur la route
         </h2>
-        <p className="font-mono text-[11px] text-[var(--vos-muted)]">
-          Géométrie des déplacements · clique un nœud
+        <p className="text-[11px] text-[var(--vos-muted)]">
+          Clique un lieu pour l&apos;histoire
         </p>
       </div>
       <div className="grid min-h-0 flex-1 grid-cols-1 sm:grid-cols-[1.4fr_1fr]">

@@ -13,7 +13,7 @@ export function MobileLauncher() {
   if (mobileApp) {
     const meta = APP_BY_ID[mobileApp];
     return (
-      <div className="absolute inset-x-0 top-9 bottom-0 z-40 flex flex-col bg-[var(--vos-bg)]">
+      <div className="absolute inset-x-0 top-10 bottom-0 z-40 flex flex-col bg-[var(--vos-bg)] pb-24">
         <div className="flex h-12 shrink-0 items-center gap-3 border-b border-[var(--vos-border)] bg-[var(--vos-elevated)] px-3">
           <button
             type="button"
@@ -21,13 +21,11 @@ export function MobileLauncher() {
               closeApp(mobileApp);
               setMobileApp(null);
             }}
-            className="font-mono text-xs text-[var(--vos-amber)]"
+            className="text-sm text-[var(--vos-rose)]"
           >
-            ← Bureau
+            ← Accueil
           </button>
-          <span className="truncate font-mono text-sm text-[var(--vos-text)]">
-            {meta.name}
-          </span>
+          <span className="truncate text-sm text-[var(--vos-text)]">{meta.name}</span>
         </div>
         <div className="vos-scroll min-h-0 flex-1 overflow-auto">
           <AppContent id={mobileApp} />
@@ -37,12 +35,12 @@ export function MobileLauncher() {
   }
 
   return (
-    <div className="absolute inset-x-0 top-9 bottom-0 z-30 overflow-auto px-4 py-6">
-      <p className="mb-1 font-[family-name:var(--font-instrument)] text-3xl text-[var(--vos-amber)]">
-        Applications
+    <div className="absolute inset-x-0 top-10 bottom-0 z-30 overflow-auto px-4 py-6 pb-28">
+      <p className="mb-1 font-[family-name:var(--font-instrument)] text-3xl text-[var(--vos-rose)]">
+        Explore
       </p>
-      <p className="mb-6 font-mono text-xs text-[var(--vos-muted)]">
-        Explore le changelog 2026.08
+      <p className="mb-6 text-sm text-[var(--vos-muted)]">
+        Choisis une pièce de l&apos;année — le bot reste en bas à droite.
       </p>
       <div className="grid grid-cols-2 gap-3">
         {APPS.map((app, i) => (
@@ -53,13 +51,13 @@ export function MobileLauncher() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
             onClick={() => openApp(app.id)}
-            className="flex flex-col items-start gap-2 rounded-2xl border border-[var(--vos-border)] bg-[var(--vos-panel)] p-4 text-left"
+            className="flex flex-col items-start gap-2 rounded-2xl border border-[var(--vos-border)] bg-[var(--vos-panel)]/80 p-4 text-left backdrop-blur-sm"
           >
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--vos-border)] bg-[var(--vos-elevated)] font-mono text-xl text-[var(--vos-amber)]">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--vos-border)] bg-[var(--vos-elevated)] text-xl text-[var(--vos-rose)]">
               {app.icon}
             </span>
-            <span className="font-mono text-sm text-[var(--vos-text)]">{app.shortName}</span>
-            <span className="font-mono text-[10px] leading-snug text-[var(--vos-dim)]">
+            <span className="text-sm text-[var(--vos-text)]">{app.shortName}</span>
+            <span className="text-[11px] leading-snug text-[var(--vos-dim)]">
               {app.description}
             </span>
           </motion.button>
