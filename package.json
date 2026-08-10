@@ -1,6 +1,6 @@
 {
-  "name": "victor-os-tmp",
-  "version": "0.1.0",
+  "name": "victor-os",
+  "version": "2026.8.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.116.0",
+    "motion": "^13.0.0",
     "next": "16.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"

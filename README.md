@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VictorOS 2026.08
 
-## Getting Started
+Dashboard interactif type « système d'exploitation » pour le bilan de l'année — avec **Victor-Bot** (Claude).
 
-First, run the development server:
+## Stack
+
+- Next.js (App Router) + TypeScript + Tailwind CSS
+- Motion (animations fenêtres / dock)
+- Anthropic SDK (API route serveur uniquement)
+
+## Setup local
 
 ```bash
+npm install
+cp .env.example .env.local
+# Ajoute ta clé ANTHROPIC_API_KEY dans .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables d'environnement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Description |
+|----------|-------------|
+| `ANTHROPIC_API_KEY` | Clé API Anthropic pour Victor-Bot |
 
-## Learn More
+Sans cette clé, le reste du dashboard fonctionne ; seul le chat renvoie une erreur 503 claire.
 
-To learn more about Next.js, take a look at the following resources:
+## Déploiement (Vercel ou autre)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Connecte le repo / déploie le dossier
+2. Ajoute `ANTHROPIC_API_KEY` dans les env vars de production
+3. Build command : `npm run build`
+4. Output : Next.js standard
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build && npm start
+```
 
-## Deploy on Vercel
+## Médias
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Place tes photos dans `public/media/{career,vera,travel,sports,lab}/` — les apps utilisent pour l'instant des placeholders stylisés prêts à être remplacés.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Apps
+
+| App | Contenu |
+|-----|---------|
+| Career.app | Changelog Feldrise → Katalyx / Webisport / Ynov |
+| PatchVera.app | Patch relationnel + mycologie + cinéma |
+| NetworkMap.app | Carte des voyages |
+| Metrics.app | Rennes, CdM, ping-pong, Variable Bretagne |
+| Lab.app | Processus R&D (htop) |
+| VictorBot.app | Chat Claude sarcastique / anti-spoil |
