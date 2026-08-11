@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useDesktop } from "./DesktopContext";
 import { VictorBotApp } from "@/components/apps/VictorBotApp";
+import { botIconSrc } from "./AppIcon";
 
 export function BotCompanion() {
   const { botOpen, toggleBot, setBotOpen, isMobile } = useDesktop();
@@ -20,18 +21,27 @@ export function BotCompanion() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 360, damping: 28 }}
-            className={`vos-window-shadow pointer-events-auto mb-3 overflow-hidden rounded-2xl border border-[var(--vos-rose)]/35 bg-[var(--vos-window)] backdrop-blur-xl ${
+            className={`vos-window-shadow pointer-events-auto mb-3 overflow-hidden rounded-2xl border border-[var(--vos-teal)]/40 bg-[var(--vos-window)] backdrop-blur-md ${
               isMobile ? "h-[min(70dvh,520px)] w-full" : "h-[520px] w-[380px]"
             }`}
           >
-            <div className="flex items-center justify-between border-b border-[var(--vos-border-subtle)] bg-[var(--vos-elevated)]/90 px-4 py-2.5">
-              <div>
-                <p className="text-[10px] tracking-wide text-[var(--vos-rose)] uppercase">
-                  Toujours là
-                </p>
-                <p className="font-[family-name:var(--font-instrument)] text-lg text-[var(--vos-text)]">
-                  Victor-Bot
-                </p>
+            <div className="flex items-center justify-between border-b border-[var(--vos-border-subtle)] bg-[var(--vos-elevated)] px-4 py-2.5">
+              <div className="flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={botIconSrc()}
+                  alt=""
+                  className="h-9 w-9 rounded-xl object-cover shadow"
+                  draggable={false}
+                />
+                <div>
+                  <p className="text-[10px] tracking-wide text-[var(--vos-teal)] uppercase">
+                    Toujours là
+                  </p>
+                  <p className="font-[family-name:var(--font-instrument)] text-lg text-[var(--vos-text)]">
+                    Victor-Bot
+                  </p>
+                </div>
               </div>
               <button
                 type="button"
@@ -41,7 +51,7 @@ export function BotCompanion() {
                 Fermer
               </button>
             </div>
-            <div className="h-[calc(100%-52px)]">
+            <div className="h-[calc(100%-52px)] bg-[var(--vos-bg-content)]">
               <VictorBotApp compact />
             </div>
           </motion.div>
@@ -55,14 +65,15 @@ export function BotCompanion() {
           whileTap={{ scale: 0.96 }}
           onClick={toggleBot}
           aria-label={botOpen ? "Fermer Victor-Bot" : "Ouvrir Victor-Bot"}
-          className={`group relative flex items-center gap-3 rounded-full border border-[var(--vos-rose)]/40 bg-gradient-to-br from-[var(--vos-rose)] to-[var(--vos-copper)] px-4 py-3 text-[var(--vos-text)] shadow-lg ${
-            botOpen ? "pr-4" : ""
-          }`}
-          style={{ color: "#fff" }}
+          className="group relative flex items-center gap-3 rounded-full border border-white/20 bg-gradient-to-br from-[var(--vos-teal)] to-[var(--vos-sky)] px-4 py-3 text-white shadow-lg"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-lg backdrop-blur-sm">
-            ✦
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={botIconSrc()}
+            alt=""
+            className="h-9 w-9 rounded-full object-cover ring-2 ring-white/30"
+            draggable={false}
+          />
           <span className="pr-1 text-left">
             <span className="block text-[10px] tracking-wide uppercase opacity-80">
               Demande-moi

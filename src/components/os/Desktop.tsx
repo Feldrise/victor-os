@@ -11,9 +11,10 @@ import { MobileLauncher } from "./MobileLauncher";
 import { BootSequence } from "./BootSequence";
 import { WallpaperArt } from "./WallpaperArt";
 import { BotCompanion } from "./BotCompanion";
+import { AppIcon } from "./AppIcon";
 import { AppContent } from "@/components/apps/AppContent";
 import { ALL_APP_IDS } from "@/content/apps";
-import type { ThemeMode } from "@/content/types";
+import type { AppId, ThemeMode } from "@/content/types";
 
 function DesktopInner() {
   const { setIsMobile, isMobile, openApp } = useDesktop();
@@ -34,33 +35,35 @@ function DesktopInner() {
       {!booted && <BootSequence onDone={() => setBooted(true)} />}
 
       <div
-        className={`relative flex h-full flex-col transition-opacity duration-500 ${
+        className={`relative h-full transition-opacity duration-500 ${
           booted ? "opacity-100" : "opacity-0"
         }`}
       >
         <MenuBar />
 
-        <div className="relative min-h-0 flex-1">
+        <div className="absolute inset-0">
           {!isMobile && (
             <>
-              <div className="absolute top-6 left-5 z-10 flex flex-col gap-3">
+              <div className="absolute top-14 left-5 z-10 flex flex-col gap-3">
                 {(
                   [
-                    ["career", "Pro", "✦"],
-                    ["vera", "Vera", "♥"],
-                    ["travel", "Voyages", "✈"],
-                  ] as const
-                ).map(([id, label, icon]) => (
+                    ["career", "Pro"],
+                    ["vera", "Vera"],
+                    ["travel", "Voyages"],
+                  ] as const satisfies ReadonlyArray<readonly [AppId, string]>
+                ).map(([id, label]) => (
                   <button
                     key={id}
                     type="button"
                     onClick={() => openApp(id)}
-                    className="group flex w-20 flex-col items-center gap-1 rounded-xl p-2 hover:bg-white/10"
+                    className="group flex w-20 flex-col items-center gap-1 rounded-xl p-2 hover:bg-black/25"
                   >
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--vos-border)] bg-[var(--vos-panel)]/70 text-xl text-[var(--vos-rose)] shadow-md backdrop-blur-sm">
-                      {icon}
-                    </span>
-                    <span className="text-center text-[11px] text-[var(--vos-muted)] group-hover:text-[var(--vos-text)]">
+                    <AppIcon
+                      id={id}
+                      size="xl"
+                      className="ring-1 ring-white/20 transition group-hover:ring-white/40 group-hover:brightness-110"
+                    />
+                    <span className="text-center text-[11px] font-medium text-white/85 drop-shadow-md group-hover:text-white">
                       {label}
                     </span>
                   </button>
@@ -68,11 +71,11 @@ function DesktopInner() {
               </div>
 
               <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                <div className="pointer-events-none select-none text-center opacity-[0.12]">
-                  <p className="font-[family-name:var(--font-instrument)] text-6xl text-[var(--vos-text)] md:text-7xl">
+                <div className="pointer-events-none select-none text-center opacity-[0.14]">
+                  <p className="font-[family-name:var(--font-instrument)] text-6xl text-white md:text-7xl">
                     Retrouvailles
                   </p>
-                  <p className="mt-2 text-sm tracking-[0.25em] text-[var(--vos-text)] uppercase">
+                  <p className="mt-2 text-sm tracking-[0.25em] text-white uppercase">
                     Été 2026
                   </p>
                 </div>

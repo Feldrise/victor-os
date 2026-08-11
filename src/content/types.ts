@@ -24,7 +24,10 @@ export type AppMeta = {
   id: AppId;
   name: string;
   shortName: string;
+  /** Fallback glyph when image icons are unavailable */
   icon: string;
+  /** Per-app accent used for focus rings / open dots */
+  accent: string;
   description: string;
   defaultSize: { width: number; height: number };
 };

@@ -167,7 +167,7 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
           return {
             ...w,
             x: Math.max(0, next.x),
-            y: Math.max(36, next.y),
+            y: Math.max(40, next.y),
             width: Math.max(MIN_WINDOW.width, next.width),
             height: Math.max(MIN_WINDOW.height, next.height),
           };

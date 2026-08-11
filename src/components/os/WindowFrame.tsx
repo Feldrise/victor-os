@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { APP_BY_ID } from "@/content/apps";
 import type { AppId, ResizeEdge } from "@/content/types";
 import { computeResize, useDesktop } from "./DesktopContext";
+import { AppIcon } from "./AppIcon";
 
 type Props = {
   id: AppId;
@@ -65,7 +66,7 @@ export function WindowFrame({ id, children }: Props) {
     (e: PointerEvent<HTMLDivElement>) => {
       if (!dragging || !win || win.maximized) return;
       const nextX = Math.max(0, e.clientX - dragOffset.current.x);
-      const nextY = Math.max(36, e.clientY - dragOffset.current.y);
+      const nextY = Math.max(40, e.clientY - dragOffset.current.y);
       moveWindow(id, nextX, nextY);
     },
     [dragging, id, moveWindow, win],
@@ -118,9 +119,9 @@ export function WindowFrame({ id, children }: Props) {
   const style = win.maximized
     ? {
         left: 0,
-        top: 36,
+        top: 40,
         width: "100%" as const,
-        height: "calc(100% - 36px - 96px)",
+        height: "calc(100% - 40px - 96px)",
         zIndex: win.zIndex,
       }
     : {
@@ -139,14 +140,17 @@ export function WindowFrame({ id, children }: Props) {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.97, y: 8 }}
       transition={{ type: "spring", stiffness: 380, damping: 28 }}
-      className={`vos-window-shadow absolute flex flex-col overflow-hidden rounded-2xl border bg-[var(--vos-window)] backdrop-blur-xl ${
-        isActive ? "border-[var(--vos-rose)]/45" : "border-[var(--vos-border)]"
-      }`}
-      style={style}
+      className={`vos-window-shadow absolute flex flex-col overflow-hidden border bg-[var(--vos-window)] backdrop-blur-md ${
+        win.maximized ? "rounded-none" : "rounded-2xl"
+      } ${isActive ? "" : "border-[var(--vos-border)]"}`}
+      style={{
+        ...style,
+        ...(isActive ? { borderColor: `color-mix(in srgb, ${meta.accent} 55%, transparent)` } : {}),
+      }}
       onMouseDown={() => focusApp(id)}
     >
       <div
-        className="flex h-11 shrink-0 cursor-grab items-center gap-2 border-b border-[var(--vos-border-subtle)] bg-[var(--vos-elevated)]/80 px-3 active:cursor-grabbing"
+        className="flex h-11 shrink-0 cursor-grab items-center gap-2 border-b border-[var(--vos-border-subtle)] bg-[var(--vos-elevated)] px-3 active:cursor-grabbing"
         onPointerDown={onPointerDownTitle}
         onPointerMove={onPointerMoveTitle}
         onPointerUp={onPointerUpTitle}
@@ -173,13 +177,13 @@ export function WindowFrame({ id, children }: Props) {
           />
         </div>
         <div className="flex min-w-0 flex-1 items-center justify-center gap-2">
-          <span className="text-sm text-[var(--vos-rose)]">{meta.icon}</span>
+          <AppIcon id={id} size="sm" rounded="rounded-md" />
           <span className="truncate text-sm text-[var(--vos-muted)]">{titleLabel}</span>
         </div>
         <span className="w-14" />
       </div>
       <div
-        className={`min-h-0 flex-1 ${
+        className={`min-h-0 flex-1 bg-[var(--vos-bg-content)] ${
           id === "browser" ? "overflow-hidden" : "vos-scroll overflow-auto"
         }`}
       >

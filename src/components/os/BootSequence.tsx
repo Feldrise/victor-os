@@ -54,7 +54,7 @@ export function BootSequence({ onDone }: Props) {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center"
           >
-            <p className="mb-2 text-sm tracking-[0.3em] text-[var(--vos-rose)] uppercase">
+            <p className="mb-2 text-sm tracking-[0.3em] text-[var(--vos-amber)] uppercase">
               Été 2026
             </p>
             <h1 className="font-[family-name:var(--font-instrument)] text-4xl text-[var(--vos-text)] sm:text-5xl">
@@ -80,7 +80,7 @@ export function BootSequence({ onDone }: Props) {
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="pt-2 text-center font-[family-name:var(--font-instrument)] text-xl text-[var(--vos-rose)]"
+                className="pt-2 text-center font-[family-name:var(--font-instrument)] text-xl text-[var(--vos-amber)]"
               >
                 Bienvenue.
               </motion.p>

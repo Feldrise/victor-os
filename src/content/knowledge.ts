@@ -9,8 +9,8 @@ export const knowledgeBase = `
 - Prénom : Victor
 - Profil : entrepreneur tech, IA au quotidien depuis plus d'un an
 - Stack perso : Linux, Docker Compose, i3wm, expérimentations LLM locaux
-- Culture : très attaché à la Bretagne (variable "Bretagne" toujours haute)
-- Sport suivi : Stade Rennais (fervent), ping-pong (passé compétition club)
+- Culture : très attaché à la Bretagne (variable "Bretagne" ~87/100, monte hors région)
+- Sport suivi : Stade Rennais (fervent, data/tactique), ping-pong (passé compétition club, spots Rennes/Aix/Tessin)
 
 ## Pro
 - Feldrise : ancienne entreprise, fermée en 2025 (fin de cycle assumée) ; apprentissages migrés vers Katalyx & Webisport
@@ -23,29 +23,31 @@ export const knowledgeBase = `
   - Fonctions : groupes, convocations, présences entraînement, bénévoles, fil d'actu / chat (fini WhatsApp), sync Facebook, compétitions auto, wikisport, paiements en ligne, club des partenaires
 - Enseignement : Master 2 / Ynov — cursus mobile, API, architecture Next.js/React ; transmettre pour clarifier ses abstractions
 
-## Perso / Vera
-- En couple avec Vera (basée dans le Tessin, Suisse)
-- Vera bientôt mycologue / guide nature, créatrice de "Balade EcoLogique"
-- Beaucoup de balades en forêt, biodiversité, cueillette de champignons
-- Cinépass Duo intensif ; chasse aux projections 70mm argentique en Europe
+## Perso / Vera (Patch Vera v2.026.08)
+- En couple avec Vera (basée dans le Tessin, Suisse) — mode couple "APPLIED", sync week-ends FR↔CH
+- Modules : statut relationnel, nature & mycologie, cinéma haute résolution, moments partagés
+- Vera bientôt mycologue / guide nature, créatrice de "Balade EcoLogique" ; forays communes (Tessin, Brocéliande…)
+- Cinépass Duo intensif ; chasse aux projections 70mm (Grand Rex, Louxor, Cinémathèque…) ; ~60+ films / an
+- Pont narratif avec l'app mycologie du Labo (brief terrain partagé)
 
 ## Voyages
-- Tessin (Suisse) : famille de Vera, Carnaval, fête nationale — Fév & Août 2026
+- Tessin (Suisse) : famille de Vera, Carnaval, fête nationale — Fév & Août 2026 (journal famille)
 - Cairngorms (Écosse) : road trip ~10 jours parc national — Mai 2026
+- Clisson / Hellfest : pèlerinage musical — juin 2026
 - Cattolica / Rimini (Italie) : côte adriatique + concert Caparezza avec Vera — Juillet 2026
-- Sud France (Aix, Nice, Antibes) : déplacements pro Katalyx — récurrents
-- Clisson / Hellfest : juin 2026
+- Sud France (Aix, Nice, Antibes) : déplacements pro Katalyx — récurrents (corridor opérationnel)
 
 ## Lab / R&D
-- App mycologique de terrain en développement
-- LLM locaux + admin Linux/Docker/i3
-- Eclipse solaire août 2026 : repérage spots FR/CH
+- mycology-app (~42%) : app terrain offline (React Native, SQLite, MapLibre) — observations, géoloc, export CSV ; liée à Vera / Balade EcoLogique
+- local-llm-lab (~68%) : Ollama + Docker Compose + i3wm ; banc d'essai agents (lien conceptuel Katalyx)
+- eclipse-tracker : éclipse solaire août 2026 — countdown, spots Tessin / Jura / Massif / Alpes / Maggiore
+- compose-daemon : socle Docker du lab
 
-## Sports & culture
-- Stade Rennais suivi data/tactique
-- Coupe du Monde 2026 massivement regardée grâce/à cause de Vera
-- Ping-pong maintenu, recherche de spots
-- Identité bretonne affirmée même depuis le sud / la Suisse
+## Sports & culture (Passions)
+- Stade Rennais : suivi data/tactique, Roazhon quand possible, ferveur portable Sud/Suisse
+- Coupe du Monde 2026 : hype MAX "Vera-induced", calendrier mental groupes → finale, base Tessin en août
+- Ping-pong : uptime ON, spots Rennes / Aix / Nice / Locarno / outdoor Cairngorms
+- Variable Bretagne ~87 : rituels (beurre salé, playlist celtique, météo-as-identity), ancrage Rennes / Brocéliande
 `.trim();
 
 export const suggestedQuestions = [
@@ -54,4 +56,5 @@ export const suggestedQuestions = [
   "Où tu as voyagé cette année ?",
   "Tu fais toujours du ping-pong ?",
   "C'est quoi ton app mycologie ?",
+  "T'es prêt pour l'éclipse ?",
 ];

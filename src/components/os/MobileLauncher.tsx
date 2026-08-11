@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { APPS, APP_BY_ID } from "@/content/apps";
 import { useDesktop } from "./DesktopContext";
 import { AppContent } from "@/components/apps/AppContent";
+import { AppIcon } from "./AppIcon";
 
 export function MobileLauncher() {
   const {
@@ -32,7 +33,7 @@ export function MobileLauncher() {
               closeApp(mobileApp);
               setMobileApp(null);
             }}
-            className="text-sm text-[var(--vos-rose)]"
+            className="text-sm text-[var(--vos-teal)]"
           >
             ← Accueil
           </button>
@@ -51,7 +52,7 @@ export function MobileLauncher() {
 
   return (
     <div className="absolute inset-x-0 top-10 bottom-0 z-30 overflow-auto px-4 py-6 pb-28">
-      <p className="mb-1 font-[family-name:var(--font-instrument)] text-3xl text-[var(--vos-rose)]">
+      <p className="mb-1 font-[family-name:var(--font-instrument)] text-3xl text-[var(--vos-text)]">
         Explore
       </p>
       <p className="mb-6 text-sm text-[var(--vos-muted)]">
@@ -66,11 +67,9 @@ export function MobileLauncher() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
             onClick={() => openApp(app.id)}
-            className="flex flex-col items-start gap-2 rounded-2xl border border-[var(--vos-border)] bg-[var(--vos-panel)]/80 p-4 text-left backdrop-blur-sm"
+            className="flex flex-col items-start gap-2 rounded-2xl border border-[var(--vos-border)] bg-[var(--vos-panel)] p-4 text-left shadow-lg"
           >
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--vos-border)] bg-[var(--vos-elevated)] text-xl text-[var(--vos-rose)]">
-              {app.icon}
-            </span>
+            <AppIcon id={app.id} size="lg" />
             <span className="text-sm text-[var(--vos-text)]">{app.shortName}</span>
             <span className="text-[11px] leading-snug text-[var(--vos-dim)]">
               {app.description}

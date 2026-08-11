@@ -1,70 +1,72 @@
 @import "tailwindcss";
 
-/* Dark — nuit améthyste, violet sensuel + or chaud */
+/* Dark — charcoal chaud, accents coucher de soleil (corail / teal / or) */
 :root,
 [data-theme="dark"] {
-  --vos-bg: #120e1a;
-  --vos-bg-elevated: #1c1628;
-  --vos-bg-window: rgba(28, 22, 40, 0.94);
-  --vos-bg-panel: #261e36;
-  --vos-border: rgba(186, 160, 230, 0.2);
-  --vos-border-subtle: rgba(186, 160, 230, 0.1);
-  --vos-amber: #e0b878;
-  --vos-amber-dim: #c09450;
-  --vos-copper: #c9a06a;
-  --vos-copper-bright: #e0bc88;
-  --vos-rose: #b894f0;
-  --vos-blush: #d4c0f8;
-  --vos-text: #f2ecf8;
-  --vos-text-muted: #a898b8;
-  --vos-text-dim: #6e6280;
-  --vos-success: #8bc4a0;
-  --vos-danger: #e08090;
-  --vos-info: #9ab0d8;
-  --vos-deprecated: #9880a0;
-  --vos-grid: rgba(184, 148, 240, 0.05);
-  --vos-glow: rgba(184, 148, 240, 0.22);
-  --vos-menubar: rgba(18, 14, 26, 0.75);
-  --vos-dock: rgba(28, 22, 40, 0.8);
-  --vos-wallpaper-a: #1e1430;
-  --vos-wallpaper-b: #120e1a;
-  --vos-wallpaper-c: #3a2460;
-  --vos-silhouette: rgba(212, 192, 248, 0.22);
-  --vos-silhouette-deep: rgba(120, 70, 180, 0.4);
+  --vos-bg: #12110f;
+  --vos-bg-elevated: #1a1916;
+  --vos-bg-window: rgba(20, 19, 17, 0.97);
+  --vos-bg-content: #161512;
+  --vos-bg-panel: #24221e;
+  --vos-border: rgba(232, 196, 150, 0.18);
+  --vos-border-subtle: rgba(232, 196, 150, 0.08);
+  --vos-amber: #e8b86a;
+  --vos-amber-dim: #c49248;
+  --vos-copper: #d4a06a;
+  --vos-copper-bright: #e8c088;
+  --vos-rose: #e07850;
+  --vos-blush: #f0a888;
+  --vos-teal: #4a9e9a;
+  --vos-teal-bright: #6ec4be;
+  --vos-sky: #6a9ec8;
+  --vos-text: #f4efe6;
+  --vos-text-muted: #a89e90;
+  --vos-text-dim: #6e665c;
+  --vos-success: #6eb888;
+  --vos-danger: #e07070;
+  --vos-info: #6a9ec8;
+  --vos-deprecated: #8a8078;
+  --vos-grid: rgba(232, 184, 106, 0.05);
+  --vos-glow: rgba(224, 120, 80, 0.2);
+  --vos-menubar: rgba(18, 17, 15, 0.72);
+  --vos-dock: rgba(26, 25, 22, 0.78);
+  --vos-wallpaper-veil: rgba(12, 10, 8, 0.28);
+  --vos-wallpaper-bottom: rgba(12, 10, 8, 0.55);
   --background: var(--vos-bg);
   --foreground: var(--vos-text);
 }
 
-/* Light — lavande douce, encre prune */
+/* Light — pierre froide, accents teal / corail */
 [data-theme="light"] {
-  --vos-bg: #f3eef8;
-  --vos-bg-elevated: #fbf8fe;
-  --vos-bg-window: rgba(251, 248, 254, 0.94);
-  --vos-bg-panel: #ebe3f4;
-  --vos-border: rgba(90, 60, 140, 0.16);
-  --vos-border-subtle: rgba(90, 60, 140, 0.08);
-  --vos-amber: #b8864a;
-  --vos-amber-dim: #966c38;
-  --vos-copper: #a87850;
-  --vos-copper-bright: #c49468;
-  --vos-rose: #7a52c4;
-  --vos-blush: #b090e0;
-  --vos-text: #1e1630;
-  --vos-text-muted: #5c4e72;
-  --vos-text-dim: #8a7c9c;
-  --vos-success: #3e8864;
-  --vos-danger: #c04858;
-  --vos-info: #506890;
-  --vos-deprecated: #7a6888;
-  --vos-grid: rgba(122, 82, 196, 0.06);
-  --vos-glow: rgba(122, 82, 196, 0.14);
-  --vos-menubar: rgba(251, 248, 254, 0.8);
-  --vos-dock: rgba(251, 248, 254, 0.85);
-  --vos-wallpaper-a: #e4d8f4;
-  --vos-wallpaper-b: #f3eef8;
-  --vos-wallpaper-c: #d0bcec;
-  --vos-silhouette: rgba(100, 60, 160, 0.14);
-  --vos-silhouette-deep: rgba(80, 40, 140, 0.22);
+  --vos-bg: #e8e6e2;
+  --vos-bg-elevated: #f5f3f0;
+  --vos-bg-window: rgba(248, 246, 243, 0.98);
+  --vos-bg-content: #f7f5f2;
+  --vos-bg-panel: #ddd9d3;
+  --vos-border: rgba(60, 50, 40, 0.14);
+  --vos-border-subtle: rgba(60, 50, 40, 0.08);
+  --vos-amber: #b87830;
+  --vos-amber-dim: #966028;
+  --vos-copper: #a87048;
+  --vos-copper-bright: #c48858;
+  --vos-rose: #c45a38;
+  --vos-blush: #d88868;
+  --vos-teal: #2e7a76;
+  --vos-teal-bright: #3a9490;
+  --vos-sky: #3a6e98;
+  --vos-text: #1c1814;
+  --vos-text-muted: #5c544c;
+  --vos-text-dim: #8a8278;
+  --vos-success: #2e7850;
+  --vos-danger: #b83840;
+  --vos-info: #3a6e98;
+  --vos-deprecated: #7a7268;
+  --vos-grid: rgba(46, 122, 118, 0.06);
+  --vos-glow: rgba(196, 90, 56, 0.12);
+  --vos-menubar: rgba(245, 243, 240, 0.82);
+  --vos-dock: rgba(245, 243, 240, 0.88);
+  --vos-wallpaper-veil: rgba(232, 230, 226, 0.2);
+  --vos-wallpaper-bottom: rgba(232, 230, 226, 0.45);
   --background: var(--vos-bg);
   --foreground: var(--vos-text);
 }
@@ -75,12 +77,15 @@
   --color-vos-bg: var(--vos-bg);
   --color-vos-elevated: var(--vos-bg-elevated);
   --color-vos-window: var(--vos-bg-window);
+  --color-vos-content: var(--vos-bg-content);
   --color-vos-panel: var(--vos-bg-panel);
   --color-vos-border: var(--vos-border);
   --color-vos-amber: var(--vos-amber);
   --color-vos-copper: var(--vos-copper);
   --color-vos-rose: var(--vos-rose);
   --color-vos-blush: var(--vos-blush);
+  --color-vos-teal: var(--vos-teal);
+  --color-vos-sky: var(--vos-sky);
   --color-vos-text: var(--vos-text);
   --color-vos-muted: var(--vos-text-muted);
   --color-vos-dim: var(--vos-text-dim);
@@ -116,11 +121,7 @@ body {
 }
 
 .vos-wallpaper {
-  background:
-    radial-gradient(ellipse 70% 55% at 75% 30%, var(--vos-wallpaper-c), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 15% 70%, color-mix(in srgb, var(--vos-rose) 25%, transparent), transparent 50%),
-    linear-gradient(165deg, var(--vos-wallpaper-a) 0%, var(--vos-wallpaper-b) 55%, var(--vos-bg) 100%);
-  transition: background 0.4s ease;
+  background: var(--vos-bg);
 }
 
 .vos-grain::after {
@@ -128,7 +129,8 @@ body {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.035;
+  opacity: 0.04;
+  z-index: 1;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
 }
@@ -197,20 +199,22 @@ body {
 .vos-window-shadow {
   box-shadow:
     0 0 0 1px var(--vos-border),
-    0 20px 50px rgba(40, 20, 30, 0.28),
-    0 0 32px var(--vos-glow);
+    0 24px 56px rgba(0, 0, 0, 0.42),
+    0 0 40px var(--vos-glow);
 }
 
 .vos-dock-glass {
   background: var(--vos-dock);
-  backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(22px) saturate(1.35);
   border: 1px solid var(--vos-border);
-  box-shadow: 0 10px 36px rgba(40, 20, 30, 0.22);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
 
 .vos-menubar-glass {
   background: var(--vos-menubar);
-  backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(18px) saturate(1.2);
+  border-bottom: 1px solid color-mix(in srgb, var(--vos-border) 55%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--vos-text) 4%, transparent);
 }
 
 .vos-resize-handle {
@@ -273,4 +277,22 @@ body {
   width: 12px;
   height: 12px;
   cursor: nesw-resize;
+}
+
+/* Leaflet inside Voyages window */
+.travel-map.leaflet-container {
+  background: var(--vos-bg);
+  font-family: var(--font-ibm-plex-sans), system-ui, sans-serif;
+  z-index: 0;
+}
+.travel-map-tooltip.leaflet-tooltip {
+  background: var(--vos-bg-panel);
+  border: 1px solid var(--vos-border);
+  border-radius: 2px;
+  color: var(--vos-text);
+  box-shadow: none;
+  padding: 4px 8px;
+}
+.travel-map-tooltip.leaflet-tooltip::before {
+  border-top-color: var(--vos-border);
 }

@@ -82,7 +82,7 @@ function ListView({ onOpen }: { onOpen: (id: string) => void }) {
   return (
     <>
       <header className="shrink-0 border-b border-[var(--vos-border)] bg-[var(--vos-bg-panel)] px-5 py-5">
-        <p className="text-[10px] tracking-[0.2em] text-[var(--vos-rose)] uppercase">
+        <p className="text-[10px] tracking-[0.2em] text-[var(--vos-sky)] uppercase">
           Côté boulot
         </p>
         <h2 className="mt-1 font-[family-name:var(--font-instrument)] text-2xl text-[var(--vos-text)]">

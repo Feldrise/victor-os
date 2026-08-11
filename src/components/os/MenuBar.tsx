@@ -23,10 +23,11 @@ export function MenuBar() {
   });
 
   return (
-    <header className="vos-menubar-glass relative z-50 flex h-10 items-center justify-between border-b border-[var(--vos-border)] px-4">
+    <header className="vos-menubar-glass absolute inset-x-0 top-0 z-50 flex h-10 items-center justify-between px-4">
       <div className="flex items-center gap-3">
-        <span className="font-[family-name:var(--font-instrument)] text-xl leading-none text-[var(--vos-rose)]">
+        <span className="font-[family-name:var(--font-instrument)] text-xl leading-none text-[var(--vos-text)] drop-shadow-sm">
           Victor
+          <span className="ml-1 text-[var(--vos-rose)]">.</span>
         </span>
         <span className="hidden text-xs text-[var(--vos-dim)] sm:inline">
           Été 2026 · retrouvailles
@@ -37,12 +38,12 @@ export function MenuBar() {
           type="button"
           onClick={toggleTheme}
           aria-label={theme === "dark" ? "Passer en mode clair" : "Passer en mode sombre"}
-          className="flex items-center gap-1.5 rounded-full border border-[var(--vos-border)] bg-[var(--vos-panel)]/80 px-2.5 py-1 text-[var(--vos-text)] transition hover:border-[var(--vos-rose)]/50"
+          className="flex items-center gap-1.5 rounded-full border border-[var(--vos-border)] bg-[var(--vos-panel)]/55 px-2.5 py-1 text-[var(--vos-text)] backdrop-blur-sm transition hover:border-[var(--vos-teal)]/60"
         >
           <span aria-hidden>{theme === "dark" ? "☾" : "☀"}</span>
           <span className="hidden sm:inline">{theme === "dark" ? "Sombre" : "Clair"}</span>
         </button>
-        <span className="tabular-nums">
+        <span className="tabular-nums drop-shadow-sm">
           {date} · {time}
         </span>
       </div>
