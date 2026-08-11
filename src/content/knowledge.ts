@@ -13,11 +13,15 @@ export const knowledgeBase = `
 - Sport suivi : Stade Rennais (fervent), ping-pong (passé compétition club)
 
 ## Pro
-- Feldrise : ancienne entreprise, fermée / deprecated en 2025
-- Katalyx : associé & CTO, studio tech à Aix-en-Provence
-  - Pôles : agents IA sur mesure, dev logiciel/mobile, LinkedIn B2B, SaaS internes (Parkour, Katapulse)
-- Webisport : associé & CTO — plateforme digitale pour clubs de sport amateur (convocations, fil d'actu, paiements, partenaires)
-- Enseignement : Master 2, notamment Ynov — cursus mobile, API, architecture Next.js/React
+- Feldrise : ancienne entreprise, fermée en 2025 (fin de cycle assumée) ; apprentissages migrés vers Katalyx & Webisport
+- Katalyx : associé & CTO, studio tech à Aix-en-Provence (67 Cours Mirabeau) — https://katalyx.fr
+  - Slogan : équipes libérées de ce qu'un Agent IA fait mieux
+  - Pôles : Agents IA (méthode AIFlow, audit→prod ~90j), LinkedIn B2B (objectif type 2–12 RDV/mois/commercial), SaaS Parkour (prospection) & Katapulse (contenu), développement logiciel/mobile sur mesure
+  - Preuves : ~47 entreprises B2B, note Google ~4,9/5, ROI moyen ~3,2× à 6 mois, 11 secteurs ; cas Hello Business, Norwest, Nappic, iZola…
+- Webisport : associé & CTO — https://www.webisport.com
+  - App iOS/Android + site aux couleurs du club pour sport amateur
+  - Fonctions : groupes, convocations, présences entraînement, bénévoles, fil d'actu / chat (fini WhatsApp), sync Facebook, compétitions auto, wikisport, paiements en ligne, club des partenaires
+- Enseignement : Master 2 / Ynov — cursus mobile, API, architecture Next.js/React ; transmettre pour clarifier ses abstractions
 
 ## Perso / Vera
 - En couple avec Vera (basée dans le Tessin, Suisse)

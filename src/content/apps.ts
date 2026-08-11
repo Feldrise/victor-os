@@ -1,13 +1,14 @@
 import type { AppMeta } from "./types";
 
+/** Apps shown in dock / mobile home. Browser is launched from Pro only. */
 export const APPS: AppMeta[] = [
   {
     id: "career",
     name: "Pro",
     shortName: "Pro",
     icon: "✦",
-    description: "Ce qui a changé côté boulot",
-    defaultSize: { width: 640, height: 520 },
+    description: "Activités pro — fiches & sites",
+    defaultSize: { width: 720, height: 560 },
   },
   {
     id: "vera",
@@ -43,8 +44,22 @@ export const APPS: AppMeta[] = [
   },
 ];
 
+export const BROWSER_APP: AppMeta = {
+  id: "browser",
+  name: "Navigateur",
+  shortName: "Web",
+  icon: "◎",
+  description: "Site ouvert depuis Pro",
+  defaultSize: { width: 860, height: 600 },
+};
+
 export const APP_BY_ID = Object.fromEntries(
-  APPS.map((app) => [app.id, app]),
-) as Record<(typeof APPS)[number]["id"], AppMeta>;
+  [...APPS, BROWSER_APP].map((app) => [app.id, app]),
+) as Record<(typeof APPS)[number]["id"] | "browser", AppMeta>;
 
 export const MIN_WINDOW = { width: 340, height: 260 };
+
+export const ALL_APP_IDS = [
+  ...APPS.map((a) => a.id),
+  "browser" as const,
+];

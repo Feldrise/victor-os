@@ -1,4 +1,10 @@
-export type AppId = "career" | "vera" | "travel" | "metrics" | "lab";
+export type AppId =
+  | "career"
+  | "vera"
+  | "travel"
+  | "metrics"
+  | "lab"
+  | "browser";
 
 export type ThemeMode = "dark" | "light";
 
@@ -21,6 +27,14 @@ export type AppMeta = {
   icon: string;
   description: string;
   defaultSize: { width: number; height: number };
+};
+
+export type BrowserTarget = {
+  activityId: string;
+  title: string;
+  url: string;
+  accent: string;
+  embedAllowed?: boolean;
 };
 
 export type ResizeEdge =

@@ -17,6 +17,7 @@ export function WindowFrame({ id, children }: Props) {
   const {
     windows,
     activeId,
+    browserTarget,
     closeApp,
     minimizeApp,
     focusApp,
@@ -27,6 +28,10 @@ export function WindowFrame({ id, children }: Props) {
 
   const win = windows.find((w) => w.id === id);
   const meta = APP_BY_ID[id];
+  const titleLabel =
+    id === "browser" && browserTarget
+      ? `Navigateur · ${browserTarget.title}`
+      : meta.name;
   const dragOffset = useRef({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
 
@@ -169,11 +174,17 @@ export function WindowFrame({ id, children }: Props) {
         </div>
         <div className="flex min-w-0 flex-1 items-center justify-center gap-2">
           <span className="text-sm text-[var(--vos-rose)]">{meta.icon}</span>
-          <span className="truncate text-sm text-[var(--vos-muted)]">{meta.name}</span>
+          <span className="truncate text-sm text-[var(--vos-muted)]">{titleLabel}</span>
         </div>
         <span className="w-14" />
       </div>
-      <div className="vos-scroll min-h-0 flex-1 overflow-auto">{children}</div>
+      <div
+        className={`min-h-0 flex-1 ${
+          id === "browser" ? "overflow-hidden" : "vos-scroll overflow-auto"
+        }`}
+      >
+        {children}
+      </div>
 
       {!win.maximized &&
         EDGES.map((edge) => (

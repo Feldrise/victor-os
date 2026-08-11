@@ -12,9 +12,8 @@ import { BootSequence } from "./BootSequence";
 import { WallpaperArt } from "./WallpaperArt";
 import { BotCompanion } from "./BotCompanion";
 import { AppContent } from "@/components/apps/AppContent";
-import type { AppId, ThemeMode } from "@/content/types";
-
-const APP_IDS: AppId[] = ["career", "vera", "travel", "metrics", "lab"];
+import { ALL_APP_IDS } from "@/content/apps";
+import type { ThemeMode } from "@/content/types";
 
 function DesktopInner() {
   const { setIsMobile, isMobile, openApp } = useDesktop();
@@ -80,7 +79,7 @@ function DesktopInner() {
               </div>
 
               <AnimatePresence>
-                {APP_IDS.map((id) => (
+                {ALL_APP_IDS.map((id) => (
                   <WindowFrame key={id} id={id}>
                     <AppContent id={id} />
                   </WindowFrame>

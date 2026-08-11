@@ -9,8 +9,13 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { APP_BY_ID, MIN_WINDOW } from "@/content/apps";
-import type { AppId, ResizeEdge, WindowState } from "@/content/types";
+import { APP_BY_ID, MIN_WINDOW, ALL_APP_IDS } from "@/content/apps";
+import type {
+  AppId,
+  BrowserTarget,
+  ResizeEdge,
+  WindowState,
+} from "@/content/types";
 
 type DesktopContextValue = {
   windows: WindowState[];
@@ -18,7 +23,9 @@ type DesktopContextValue = {
   isMobile: boolean;
   mobileApp: AppId | null;
   botOpen: boolean;
+  browserTarget: BrowserTarget | null;
   openApp: (id: AppId) => void;
+  openBrowser: (target: BrowserTarget) => void;
   closeApp: (id: AppId) => void;
   minimizeApp: (id: AppId) => void;
   focusApp: (id: AppId) => void;
@@ -37,17 +44,17 @@ type DesktopContextValue = {
 const DesktopContext = createContext<DesktopContextValue | null>(null);
 
 function defaultWindows(): WindowState[] {
-  const ids: AppId[] = ["career", "vera", "travel", "metrics", "lab"];
-  return ids.map((id, i) => {
+  return ALL_APP_IDS.map((id, i) => {
     const meta = APP_BY_ID[id];
+    const isBrowser = id === "browser";
     return {
       id,
       open: false,
       minimized: false,
       maximized: false,
       zIndex: i + 1,
-      x: 56 + i * 32,
-      y: 64 + i * 28,
+      x: isBrowser ? 120 : 56 + i * 32,
+      y: isBrowser ? 72 : 64 + i * 28,
       width: meta.defaultSize.width,
       height: meta.defaultSize.height,
     };
@@ -60,6 +67,9 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
   const [isMobile, setIsMobile] = useState(false);
   const [mobileApp, setMobileApp] = useState<AppId | null>(null);
   const [botOpen, setBotOpen] = useState(false);
+  const [browserTarget, setBrowserTarget] = useState<BrowserTarget | null>(
+    null,
+  );
   const zCounter = useRef(10);
 
   const focusApp = useCallback((id: AppId) => {
@@ -73,6 +83,7 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
 
   const openApp = useCallback(
     (id: AppId) => {
+      if (id === "browser" && !browserTarget) return;
       if (isMobile) {
         setMobileApp(id);
         setActiveId(id);
@@ -85,6 +96,34 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
       );
       focusApp(id);
     },
+    [browserTarget, focusApp, isMobile],
+  );
+
+  const openBrowser = useCallback(
+    (target: BrowserTarget) => {
+      setBrowserTarget(target);
+      if (isMobile) {
+        setMobileApp("browser");
+        setActiveId("browser");
+        return;
+      }
+      setWindows((prev) =>
+        prev.map((w) => {
+          if (w.id !== "browser") return w;
+          const career = prev.find((c) => c.id === "career");
+          const offsetX = career ? career.x + 48 : w.x;
+          const offsetY = career ? career.y + 36 : w.y;
+          return {
+            ...w,
+            open: true,
+            minimized: false,
+            x: Math.min(offsetX, Math.max(40, window.innerWidth - w.width - 24)),
+            y: Math.min(offsetY, Math.max(48, window.innerHeight - w.height - 120)),
+          };
+        }),
+      );
+      focusApp("browser");
+    },
     [focusApp, isMobile],
   );
 
@@ -94,6 +133,7 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
     );
     setActiveId((current) => (current === id ? null : current));
     setMobileApp((current) => (current === id ? null : current));
+    if (id === "browser") setBrowserTarget(null);
   }, []);
 
   const minimizeApp = useCallback((id: AppId) => {
@@ -148,7 +188,9 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
       isMobile,
       mobileApp,
       botOpen,
+      browserTarget,
       openApp,
+      openBrowser,
       closeApp,
       minimizeApp,
       focusApp,
@@ -166,7 +208,9 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
       isMobile,
       mobileApp,
       botOpen,
+      browserTarget,
       openApp,
+      openBrowser,
       closeApp,
       minimizeApp,
       focusApp,

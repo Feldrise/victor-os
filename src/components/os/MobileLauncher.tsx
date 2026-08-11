@@ -6,12 +6,23 @@ import { useDesktop } from "./DesktopContext";
 import { AppContent } from "@/components/apps/AppContent";
 
 export function MobileLauncher() {
-  const { isMobile, mobileApp, openApp, setMobileApp, closeApp } = useDesktop();
+  const {
+    isMobile,
+    mobileApp,
+    openApp,
+    setMobileApp,
+    closeApp,
+    browserTarget,
+  } = useDesktop();
 
   if (!isMobile) return null;
 
   if (mobileApp) {
     const meta = APP_BY_ID[mobileApp];
+    const title =
+      mobileApp === "browser" && browserTarget
+        ? browserTarget.title
+        : meta.name;
     return (
       <div className="absolute inset-x-0 top-10 bottom-0 z-40 flex flex-col bg-[var(--vos-bg)] pb-24">
         <div className="flex h-12 shrink-0 items-center gap-3 border-b border-[var(--vos-border)] bg-[var(--vos-elevated)] px-3">
@@ -25,9 +36,13 @@ export function MobileLauncher() {
           >
             ← Accueil
           </button>
-          <span className="truncate text-sm text-[var(--vos-text)]">{meta.name}</span>
+          <span className="truncate text-sm text-[var(--vos-text)]">{title}</span>
         </div>
-        <div className="vos-scroll min-h-0 flex-1 overflow-auto">
+        <div
+          className={`min-h-0 flex-1 ${
+            mobileApp === "browser" ? "overflow-hidden" : "vos-scroll overflow-auto"
+          }`}
+        >
           <AppContent id={mobileApp} />
         </div>
       </div>
