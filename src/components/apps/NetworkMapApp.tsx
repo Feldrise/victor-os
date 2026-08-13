@@ -36,6 +36,8 @@ export function NetworkMapApp() {
 
   const openTrip = (id: string) => {
     setSelectedId(id);
+    const trip = getTrip(id);
+    if (!trip || trip.hasDetail === false) return;
     setView({ kind: "detail", id });
   };
 

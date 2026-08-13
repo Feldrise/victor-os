@@ -7,34 +7,29 @@ export type VeraPhoto = {
   placeholder?: boolean;
 };
 
-export type VeraMoment = {
-  id: string;
-  date: string;
-  title: string;
-  caption: string;
-};
-
 export type VeraMetric = {
   label: string;
   value: string;
 };
 
+export type VeraFilmVerdictTone =
+  | "bad"
+  | "ok"
+  | "good"
+  | "great"
+  | "essential"
+  | "classic";
+
 export type VeraFilm = {
   id: string;
   title: string;
-  venue: string;
-  city: string;
-  format: "70mm" | "35mm" | "numérique" | "IMAX";
-  date: string;
-  note?: string;
-};
-
-export type VeraOuting = {
-  id: string;
-  date: string;
-  place: string;
-  species: string;
-  note: string;
+  originalTitle?: string;
+  year: string;
+  poster: string;
+  synopsis: string;
+  verdict: string;
+  verdictTone: VeraFilmVerdictTone;
+  series?: string;
 };
 
 export type VeraModule = {
@@ -48,32 +43,21 @@ export type VeraModule = {
   highlights: string[];
   logLines: string[];
   metrics?: VeraMetric[];
-  moments?: VeraMoment[];
   gallery?: VeraPhoto[];
   films?: VeraFilm[];
-  outings?: VeraOuting[];
 };
-
-function ph(moduleId: string, photoId: string, caption: string): VeraPhoto {
-  return {
-    id: photoId,
-    src: `/media/vera/${moduleId}/${photoId}.jpg`,
-    caption,
-    placeholder: true,
-  };
-}
 
 export const veraPatch = {
   version: "2.026.08",
   codename: "Patch Vera",
-  appliedAt: "2025–2026",
+  appliedAt: "2026",
   summary:
-    "Mise à jour majeure de l’équilibre personnel. Mode Couple activé. Nouvelles dépendances nature, mycologie et cinéma haute résolution.",
+    "Mise à jour majeure de l’équilibre personnel. Mode Couple activé. Nouvelles dépendances nature, mycologie et cinéma Pathé.",
   changelog: [
-    "dependency vera@tessin resolved — latence FR↔CH gérée",
+    "dependency vera@curio resolved — Tessin latence gérée",
     "module balade-ecologique linked — forest.walk() ↑",
-    "cinepass.duo authenticated — format=70mm preferred",
-    "shared-moments daemon started — sync week-ends",
+    "first_kiss @ 2026-03-20 after 2 walks",
+    "cinepass.duo authenticated — 37 films YTD, genre=Drame",
   ],
 };
 
@@ -85,53 +69,42 @@ export const veraModules: VeraModule[] = [
     status: "applied",
     accent: "#e89a9a",
     summary:
-      "Arrivée de Vera, basée dans le Tessin. Patch appliqué — la latence Suisse ↔ France se gère en trains, vols et week-ends planifiés.",
-    body: "Vera n’est pas une feature optionnelle : c’est le runtime. Basée côté Locarno / Maggiore, elle ancre une moitié de la vie dans le Tessin pendant que l’autre tourne entre Rennes, Aix et les sprints Katalyx. Les rituels s’installent : appels du soir, partages de calendrier, et cette habitude de compter les kilomètres en « prochaines fois » plutôt qu’en absences. Le mode couple a basculé sans rollback — avec un buffer voyage obligatoire.",
+      "Vera, née en Suisse et élevée à Curio (Tessin). Rencontre autour de l’IA, première balade, premiers bisous le 20 mars 2026 — mode couple APPLIED.",
+    body: "Vera est née en Suisse et a grandi dans un tout petit patelin du Tessin : Curio. Elle connaît donc très bien ce que c’est que l’indépendantisme — et le goût d’un village où tout le monde se croise. On s’est rencontrés à une réunion un peu complotiste autour de l’IA. Très vite, dès la deuxième, j’ai appris qu’elle était guide nature (balades en forêt). L’invitation à marcher n’a pas traîné. Il nous a fallu deux balades pour le premier bisou — le 20 mars 2026. Aujourd’hui le quotidien est chargé : voyages, deux calendriers entrepreneuriaux, les cours… mais on s’amuse à fond, et on s’aime énormément.",
     highlights: [
-      "Base Tessin — famille, lac, rythme alpin sud",
-      "Sync week-ends & congés comme pipeline prioritaire",
-      "Bilingue FR / IT au quotidien, plus l’allemand qui s’invite",
-      "Ancrage émotionnel qui réordonne pro, voyages et lab",
+      "Curio (Tessin) — village, lac, indépendantisme local inclus",
+      "Meet-cute IA → guide nature → forest.walk()",
+      "Premier bisou le 20 mars 2026 (après deux balades)",
+      "Quotidien dense : voyages, business, cours — uptime couple 100%",
     ],
     logLines: [
-      "[ok] dependency vera@tessin resolved",
-      "[ok] mode=couple enabled",
-      "[warn] weekend sync requires train/flight buffer",
-      "[info] timezone CET shared — no DST drift",
+      "[ok] dependency vera@curio resolved",
+      "[ok] mode=couple enabled @ 2026-03-20",
+      "[info] origin=reunion_IA → forest.invite()",
+      "[warn] calendars.busy=true — still laughing",
     ],
     metrics: [
       { label: "Uptime couple", value: "100%" },
-      { label: "Base", value: "Tessin" },
-      { label: "Latence moy.", value: "~4h" },
+      { label: "Base", value: "Curio" },
+      { label: "1er bisou", value: "20/03" },
       { label: "Statut", value: "STABLE" },
     ],
-    moments: [
-      {
-        id: "first-tessin",
-        date: "2025-11-08",
-        title: "Première vraie immersion Tessin",
-        caption:
-          "Train qui descend vers le lac, premières présentations familiales, et la sensation que le patch est déjà appliqué.",
-      },
-      {
-        id: "calendars",
-        date: "2026-01-12",
-        title: "Calendriers fusionnés",
-        caption:
-          "Partage des congés Katalyx / enseignement avec les fenêtres Tessin — le sync devient un sport.",
-      },
-      {
-        id: "carnaval",
-        date: "2026-02-14",
-        title: "Carnaval Locarno",
-        caption:
-          "Confettis, masques, et une table trop grande. Preuve que « chez elle » veut aussi dire « chez nous ».",
-      },
-    ],
     gallery: [
-      ph("status", "lac", "Maggiore — fin d’après-midi"),
-      ph("status", "table", "Table trop longue, chaises en trop"),
-      ph("status", "train", "Gare — sac, thermos, prochain week-end"),
+      {
+        id: "plage-koala",
+        src: "/media/vera/status/plage-koala.jpg",
+        caption: "Plage, soleil, koala à lunettes de coquillages",
+      },
+      {
+        id: "balcon-plush",
+        src: "/media/vera/status/balcon-plush.jpg",
+        caption: "Balcon, lac, duo de peluches — moral au max",
+      },
+      {
+        id: "vera-peluches",
+        src: "/media/vera/status/vera-peluches.jpg",
+        caption: "Vera + stock stratégique de doudous",
+      },
     ],
   },
   {
@@ -161,233 +134,181 @@ export const veraModules: VeraModule[] = [
       { label: "App terrain", value: "β" },
       { label: "Statut", value: "RUNNING" },
     ],
-    moments: [
-      {
-        id: "first-foray",
-        date: "2025-10-18",
-        title: "Première foray commune",
-        caption:
-          "Panier, couteau pliant, et Vera qui corrige gentiment mon « c’est un cèpe » trop optimiste.",
-      },
-      {
-        id: "be-logo",
-        date: "2026-03-02",
-        title: "Logo Balade EcoLogique",
-        caption:
-          "Esquisse sur table de cuisine — feuille, spore print, typo trop serrée. Version 0.2 validée.",
-      },
-      {
-        id: "lab-bridge",
-        date: "2026-05-20",
-        title: "Brief app mycologie",
-        caption:
-          "Liste de champs terrain dictée entre deux arbres : géoloc, habitat, photo, confiance ID.",
-      },
-    ],
-    outings: [
-      {
-        id: "o1",
-        date: "2025-10-19",
-        place: "Bois près de Locarno",
-        species: "Amanita muscaria",
-        note: "Observation only — photo + notes habitat.",
-      },
-      {
-        id: "o2",
-        date: "2025-11-02",
-        place: "Forêt de Brocéliande (week-end Bretagne)",
-        species: "Boletus edulis",
-        note: "Double ID Vera + guide local. Poêlée le soir.",
-      },
-      {
-        id: "o3",
-        date: "2026-04-12",
-        place: "Sentier Maggia",
-        species: "Morchella sp.",
-        note: "Printemps précoce — carnet humide, moral haut.",
-      },
-      {
-        id: "o4",
-        date: "2026-06-08",
-        place: "Parc naturel côté Aix (week-end pro)",
-        species: "Cantharellus cibarius",
-        note: "Petite trouvaille entre deux syncs Katalyx.",
-      },
-    ],
     gallery: [
-      ph("nature", "panier", "Panier et couteau — départ matinal"),
-      ph("nature", "amanite", "Amanite tue-mouches — observation"),
-      ph("nature", "carnet", "Carnet de terrain ouvert sous la pluie"),
+      {
+        id: "randonnee",
+        src: "/media/vera/nature/randonnee.jpg",
+        caption: "Sentier sous canopée — équipe élargie",
+      },
+      {
+        id: "champignon-inscription",
+        src: "/media/vera/nature/champignon-inscription.jpg",
+        caption: "Vera + Victor 2026 ♡ — gravé sous un polypore",
+      },
+      {
+        id: "vera-foret",
+        src: "/media/vera/nature/vera-foret.jpg",
+        caption: "Guide nature en contexte : fleur, mousse, sourire",
+      },
     ],
   },
   {
     id: "cinema",
     title: "Cinéma haute résolution",
-    eyebrow: "Cinépass Duo",
+    eyebrow: "Cinépass Duo · Pathé",
     status: "active",
     accent: "#c4a35a",
     summary:
-      "Exploitation intensive du Cinépass Duo. Chasse aux sorties modernes en argentique 70mm dans des salles européennes spécialisées.",
-    body: "Le couple a un protocole cinéma : dès qu’une projection 70mm ou une salle culte apparaît dans le rayon train, on bloque. Rennes, Paris, parfois plus loin — le Cinépass Duo tourne à plein régime. On mélange blockbusters en grand format, films d’auteur, et ces séances où le grain de la pellicule justifie le trajet. Vera note les salles ; je note les formats. Ensemble on remplit une filmothèque qui ressemble plus à un carnet de voyage qu’à une liste Netflix.",
+      "Exploitation intensive du Cinépass Duo Pathé. 37 films depuis janvier, genre favori : Drame. Mur d’affiches des séances récentes — du nul au chef-d’œuvre.",
+    body: "Le couple a un protocole cinéma : dès qu’une sortie intéressante apparaît, on bloque. Pathé compte pour nous 37 films depuis le début d’année — genre favori officiel : Drame. On mélange blockbusters, auteurs, rétros « Il était une fois », animation, et même une capture de la Comédie-Française. Vera note les salles ; je note les verdicts. Ensemble on remplit une filmothèque qui ressemble plus à un carnet de voyage qu’à une liste Netflix.",
     highlights: [
-      "Cinépass Duo — rythme quasi hebdomadaire",
-      "Priorité projections 70mm / salles spécialisées",
-      "Mix blockbusters, auteur, rétros",
-      "Filmothèque partagée comme journal",
+      "37 films Pathé depuis janvier 2026",
+      "Genre favori : Drame",
+      "Mix sorties, rétros, animation & scène filmée",
+      "Verdicts duo sans filtre (nul → vraiment top)",
     ],
     logLines: [
       "[ok] cinepass.duo authenticated",
-      "[ok] format=70mm preferred",
-      "[info] european specialty theaters indexed",
+      "[ok] films_ytd=37 genre_fav=Drame",
+      "[info] poster_wall rendered",
       "[ok] post-film debate.mode=enabled",
     ],
     metrics: [
-      { label: "Films / an", value: "60+" },
-      { label: "70mm", value: "12+" },
+      { label: "Films YTD", value: "37" },
+      { label: "Genre fav.", value: "Drame" },
       { label: "Pass", value: "Duo" },
       { label: "Statut", value: "ACTIVE" },
     ],
     films: [
       {
-        id: "f1",
-        title: "Dune: Part Three (avant-première)",
-        venue: "Grand Rex",
-        city: "Paris",
-        format: "70mm",
-        date: "2026-03-18",
-        note: "File d’attente digne d’un festival — worth it.",
+        id: "disclosure-day",
+        title: "Disclosure Day",
+        year: "2026",
+        poster: "/media/vera/cinema/posters/disclosure-day.jpg",
+        synopsis:
+          "Steven Spielberg revisitant le contact extraterrestre : une Amérique sous tension le jour où tout doit être révélé. Gros buzz, gros écran — petit frisson.",
+        verdict: "Nul",
+        verdictTone: "bad",
       },
       {
-        id: "f2",
-        title: "Portrait d’une jeune fille en feu (reprise)",
-        venue: "Arvor",
-        city: "Rennes",
-        format: "numérique",
-        date: "2025-12-06",
-        note: "Débat de sortie plus long que le film.",
+        id: "fight-club",
+        title: "Fight Club",
+        year: "1999",
+        poster: "/media/vera/cinema/posters/fight-club.jpg",
+        synopsis:
+          "Reprise « Il était une fois » : soap, savon et double vie. Fincher en salle obscure, comme la première fois.",
+        verdict: "Classique",
+        verdictTone: "classic",
+        series: "Il était une fois",
       },
       {
-        id: "f3",
-        title: "Interstellar (reprise IMAX)",
-        venue: "Pathé Plan de Campagne",
-        city: "Aix",
-        format: "IMAX",
-        date: "2026-01-24",
-        note: "Entre deux sprints Katalyx — reset mental.",
+        id: "interstellar",
+        title: "Interstellar",
+        year: "2014",
+        poster: "/media/vera/cinema/posters/interstellar.jpg",
+        synopsis:
+          "Toujours dans la série Pathé : blé, trous noirs et bande-son Zimmer. On y retourne pour le format, on reste pour Cooper.",
+        verdict: "Classique",
+        verdictTone: "classic",
+        series: "Il était une fois",
       },
       {
-        id: "f4",
-        title: "The Brutalist",
-        venue: "Le Louxor",
-        city: "Paris",
-        format: "70mm",
-        date: "2025-11-22",
-        note: "Vera avait raison sur la salle.",
+        id: "la-la-land",
+        title: "La La Land",
+        year: "2016",
+        poster: "/media/vera/cinema/posters/la-la-land.jpg",
+        synopsis:
+          "Dernière des trois séances « Il était une fois » : jazz, Hollywood et refrains qu’on fredonne en sortant.",
+        verdict: "Classique",
+        verdictTone: "classic",
+        series: "Il était une fois",
       },
       {
-        id: "f5",
-        title: "Anatomy of a Fall",
-        venue: "Cinéma Rex",
-        city: "Locarno",
-        format: "numérique",
-        date: "2026-02-15",
-        note: "Lendemain de Carnaval — séance douce.",
+        id: "comedie-francaise",
+        title: "Comédie-Française",
+        year: "2026",
+        poster: "/media/vera/cinema/posters/comedie-francaise.jpg",
+        synopsis:
+          "La troupe au cinéma : plateau, diction, rideau. Une capture scénique qui rappelle que le grand écran peut aussi être une salle de théâtre.",
+        verdict: "Super !",
+        verdictTone: "good",
       },
       {
-        id: "f6",
-        title: "2001: A Space Odyssey",
-        venue: "La Cinémathèque",
-        city: "Paris",
-        format: "70mm",
-        date: "2026-04-02",
-        note: "Pèlerinage. Silence dans la salle jusqu’au générique.",
+        id: "odyssee",
+        title: "L'Odyssée",
+        originalTitle: "The Odyssey",
+        year: "2026",
+        poster: "/media/vera/cinema/posters/odyssee.jpg",
+        synopsis:
+          "Christopher Nolan adapte Homère en IMAX : Ulysse, monstres et retour vers Ithaque. Épique, dense, fait pour la salle.",
+        verdict: "Super !",
+        verdictTone: "good",
       },
       {
-        id: "f7",
-        title: "Flow",
-        venue: "TNB",
-        city: "Rennes",
-        format: "numérique",
-        date: "2025-10-30",
-        note: "Animation + thé après — protocole validé.",
+        id: "the-drama",
+        title: "The Drama",
+        year: "2026",
+        poster: "/media/vera/cinema/posters/the-drama.jpg",
+        synopsis:
+          "Kristoffer Borgli, Zendaya & Robert Pattinson : un couple « parfait » qui bascule dans le chaos d’une fausse rupture. Ironie sèche, romance tordue.",
+        verdict: "Ok",
+        verdictTone: "ok",
       },
       {
-        id: "f8",
-        title: "Oppenheimer (reprise 70mm)",
-        venue: "UGC Ciné Cité Les Halles",
-        city: "Paris",
-        format: "70mm",
-        date: "2026-05-11",
-        note: "Deuxième visionnage, même vertige.",
-      },
-    ],
-    gallery: [
-      ph("cinema", "rex", "Façade Grand Rex — soir de 70mm"),
-      ph("cinema", "tickets", "Tickets Duo — pile qui grandit"),
-      ph("cinema", "debate", "Terrasse post-séance — débat ouvert"),
-    ],
-  },
-  {
-    id: "moments",
-    title: "Moments partagés",
-    eyebrow: "Shared buffer",
-    status: "active",
-    accent: "#7eb8da",
-    summary:
-      "Le journal hors modules : week-ends improvisés, petits rituels, et la preuve que le patch tient dans le quotidien autant que dans les grands voyages.",
-    body: "Entre Tessin, forêts et salles obscures, il reste le bruit de fond : cafés trop longs, playlists partagées, courses en deux langues, et ces dimanches où personne ne regarde l’horloge. Ce module collecte ce qui ne rentre pas dans une case — la texture du couple au jour le jour. Ce n’est pas du monitoring : c’est la preuve que le système tourne.",
-    highlights: [
-      "Rituels du quotidien (cafés, playlists, appels)",
-      "Week-ends « sans agenda » volontairement",
-      "Pont entre voyages, pro et lab sans friction",
-      "Archive légère — souvenirs avant stats",
-    ],
-    logLines: [
-      "[ok] shared-moments daemon started",
-      "[ok] playlist.sync bidirectional",
-      "[info] sunday.mode=soft",
-      "[ok] no_metrics_required=true",
-    ],
-    metrics: [
-      { label: "Rituels", value: "∞" },
-      { label: "Langues", value: "FR+IT" },
-      { label: "Mode", value: "SOFT" },
-      { label: "Priorité", value: "P0" },
-    ],
-    moments: [
-      {
-        id: "m1",
-        date: "2025-12-24",
-        title: "Noël entre deux bases",
-        caption:
-          "Demi-fêtes de chaque côté, valises, et un accord tacite : l’année suivante on invente notre propre protocole.",
+        id: "aigles-republique",
+        title: "Les Aigles de la République",
+        originalTitle: "Eagles of the Republic",
+        year: "2025",
+        poster: "/media/vera/cinema/posters/aigles-republique.jpg",
+        synopsis:
+          "Tarik Saleh referme sa trilogie du Caire : thriller politique, loyautés floues, pouvoir qui grince. Solide, sans miracle.",
+        verdict: "Ok",
+        verdictTone: "ok",
       },
       {
-        id: "m2",
-        date: "2026-03-28",
-        title: "Dimanche sans plan",
-        caption:
-          "Marché, fromage, pluie, film random. Uptime émotionnel maximal.",
+        id: "la-grazia",
+        title: "La grazia",
+        year: "2025",
+        poster: "/media/vera/cinema/posters/la-grazia.jpg",
+        synopsis:
+          "Paolo Sorrentino & Toni Servillo : un président italien face à sa conscience, la loi et la fin de mandat. Élégant, drôle, profondément humain.",
+        verdict: "Vraiment top !",
+        verdictTone: "great",
       },
       {
-        id: "m3",
-        date: "2026-06-21",
-        title: "Solstice — playlist commune",
-        caption:
-          "Mix italo-disco + folk breton. Ça ne devrait pas marcher. Ça marche.",
+        id: "nuremberg",
+        title: "Nuremberg",
+        year: "2025",
+        poster: "/media/vera/cinema/posters/nuremberg.jpg",
+        synopsis:
+          "James Vanderbilt sur les procès de Nuremberg : psychologie, histoire, et la question de regarder le mal en face. Pas du divertissement — du nécessaire.",
+        verdict: "D'utilité publique",
+        verdictTone: "essential",
       },
       {
-        id: "m4",
-        date: "2026-07-19",
-        title: "Cattolica — gelato stratégique",
-        caption:
-          "Après Caparezza, avant le train. Note terrain : toujours un gelato de secours.",
+        id: "jumpers",
+        title: "Jumpers",
+        originalTitle: "Hoppers",
+        year: "2026",
+        poster: "/media/vera/cinema/posters/jumpers.jpg",
+        synopsis:
+          "Pixar : conscience humaine branchée dans des animaux robots. Mabel explore le monde animal de l’intérieur — fun, malin, très « on y va pour le popcorn ».",
+        verdict: "Animation",
+        verdictTone: "good",
+        series: "Dessins animés",
       },
-    ],
-    gallery: [
-      ph("moments", "cafe", "Café trop long — table du fond"),
-      ph("moments", "playlist", "Écouteurs partagés, volume trop bas"),
-      ph("moments", "rain", "Pluie sur la vitre — dimanche soft"),
+      {
+        id: "zootopie-2",
+        title: "Zootopie 2",
+        originalTitle: "Zootopia 2",
+        year: "2025",
+        poster: "/media/vera/cinema/posters/zootopie-2.jpg",
+        synopsis:
+          "Judy et Nick de retour dans une Zootopie toujours trop grande pour ses préjugés. Suite Disney Animation, rythme cartoon garanti.",
+        verdict: "Animation",
+        verdictTone: "good",
+        series: "Dessins animés",
+      },
     ],
   },
 ];
@@ -400,4 +321,13 @@ export const veraStatusLabel: Record<VeraStatus, string> = {
   applied: "APPLIED",
   running: "RUNNING",
   active: "ACTIVE",
+};
+
+export const veraVerdictLabel: Record<VeraFilmVerdictTone, string> = {
+  bad: "NUL",
+  ok: "OK",
+  good: "SUPER",
+  great: "TOP",
+  essential: "UTILE",
+  classic: "CLASSIC",
 };

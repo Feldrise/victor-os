@@ -17,7 +17,7 @@ export const APPS: AppMeta[] = [
     shortName: "Vera",
     icon: "♥",
     accent: "var(--vos-rose)",
-    description: "Patch Vera — modules & moments",
+    description: "Patch Vera — couple, nature & cinéma",
     defaultSize: { width: 700, height: 540 },
   },
   {

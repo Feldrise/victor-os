@@ -166,12 +166,14 @@ function TimelineRow({
           </span>
         </span>
 
-        <span
-          className="mt-1 shrink-0 text-[var(--vos-text-dim)] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--vos-amber)]"
-          aria-hidden
-        >
-          →
-        </span>
+        {trip.hasDetail !== false && (
+          <span
+            className="mt-1 shrink-0 text-[var(--vos-text-dim)] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--vos-amber)]"
+            aria-hidden
+          >
+            →
+          </span>
+        )}
       </button>
     </motion.li>
   );

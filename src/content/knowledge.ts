@@ -24,18 +24,23 @@ export const knowledgeBase = `
 - Enseignement : Master 2 / Ynov — cursus mobile, API, architecture Next.js/React ; transmettre pour clarifier ses abstractions
 
 ## Perso / Vera (Patch Vera v2.026.08)
-- En couple avec Vera (basée dans le Tessin, Suisse) — mode couple "APPLIED", sync week-ends FR↔CH
-- Modules : statut relationnel, nature & mycologie, cinéma haute résolution, moments partagés
-- Vera bientôt mycologue / guide nature, créatrice de "Balade EcoLogique" ; forays communes (Tessin, Brocéliande…)
-- Cinépass Duo intensif ; chasse aux projections 70mm (Grand Rex, Louxor, Cinémathèque…) ; ~60+ films / an
+- En couple avec Vera (née en Suisse, a grandi à Curio dans le Tessin — connaît bien l'indépendantisme local)
+- Rencontre à une réunion un peu complotiste autour de l'IA ; à la 2ᵉ réunion, découvre qu'elle est guide nature → invitation rapide à une balade
+- Premier bisou le 20 mars 2026, après deux balades en forêt
+- Quotidien chargé (voyages, calendriers entrepreneuriaux, cours) mais ils s'amusent et s'aiment énormément
+- Modules : statut relationnel, nature & mycologie, cinéma haute résolution
+- Vera bientôt mycologue / guide nature, créatrice de "Balade EcoLogique"
+- Cinépass Duo Pathé : 37 films depuis le début d'année 2026, genre favori "Drame"
+- Films récents notables : Disclosure Day (nul), rétros Il était une fois (Fight Club, Interstellar, La La Land), Comédie-Française (super), L'Odyssée (super), The Drama (ok), Les Aigles de la République (ok), La grazia (vraiment top), Nuremberg (d'utilité publique), dessins animés (Jumpers/Hoppers, Zootopie 2)
 - Pont narratif avec l'app mycologie du Labo (brief terrain partagé)
 
 ## Voyages
-- Tessin (Suisse) : famille de Vera, Carnaval, fête nationale — Fév & Août 2026 (journal famille)
-- Cairngorms (Écosse) : road trip ~10 jours parc national — Mai 2026
-- Clisson / Hellfest : pèlerinage musical — juin 2026
-- Cattolica / Rimini (Italie) : côte adriatique + concert Caparezza avec Vera — Juillet 2026
-- Sud France (Aix, Nice, Antibes) : déplacements pro Katalyx — récurrents (corridor opérationnel)
+- Tessin / Curio (Suisse) : deux séjours famille Vera — Carnaval 14–21 fév. 2026 (Curio + nuit Bellinzone) ; été 28 juil.–11 août (canicule, lacs, 1er août / feu d’artifice Lugano)
+- Écosse / Montrose : 7–17 mars 2026 — hub Montrose (imparfait), Édimbourg & Aberdeen, routes paysages ; bières, billard, full breakfasts ; Vera rejoint le 12 mars
+- Clisson / Hellfest : pèlerinage musical — juin 2026 (pin carte uniquement, pas de journal photo)
+- Paris : 9–16 juil. 2026 avec Vera — nénuphars, Airbnb au-dessus de Roazhon’s Call (CdM), Fontainebleau (avant incendies), Atelier des Lumières (Petit Prince), Dior Champs-Élysées, 14 juillet (défilé + feu), Odyssey Nolan en 70 mm
+- Adriatique (Italie) : Bologne (hôtel creepy / bus fantôme) → Cattolica (Caparezza, meilleur café) → Rimini/Riccione (plage vide, cocktails 50€) → train retour Suisse (retards) — 17–23 juillet 2026
+- Sud France (Aix, Nice, Antibes) : déplacements pro Katalyx & Webisport — récurrents (pin carte uniquement, pas de journal)
 
 ## Lab / R&D
 - mycology-app (~42%) : app terrain offline (React Native, SQLite, MapLibre) — observations, géoloc, export CSV ; liée à Vera / Balade EcoLogique
@@ -46,7 +51,7 @@ export const knowledgeBase = `
 ## Sports & culture (Passions)
 - Stade Rennais : suivi data/tactique, Roazhon quand possible, ferveur portable Sud/Suisse
 - Coupe du Monde 2026 : hype MAX "Vera-induced", calendrier mental groupes → finale, base Tessin en août
-- Ping-pong : uptime ON, spots Rennes / Aix / Nice / Locarno / outdoor Cairngorms
+- Ping-pong : uptime ON, spots Rennes / Aix / Nice / Locarno / outdoor Écosse
 - Variable Bretagne ~87 : rituels (beurre salé, playlist celtique, météo-as-identity), ancrage Rennes / Brocéliande
 `.trim();
 
