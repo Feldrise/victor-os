@@ -10,7 +10,7 @@ export const knowledgeBase = `
 - Profil : entrepreneur tech, IA au quotidien depuis plus d'un an
 - Stack perso : Linux, Docker Compose, i3wm, expérimentations LLM locaux
 - Culture : très attaché à la Bretagne (variable "Bretagne" ~87/100, monte hors région)
-- Sport suivi : Stade Rennais (fervent, data/tactique), ping-pong (passé compétition club, spots Rennes/Aix/Tessin)
+- Sport suivi : Stade Rennais (suivi tardif 25–26, espoir C1 jusqu’à J34), ping-pong (passé compétition club ; 3 tables : camping Paimpont chez Vera, PAM Rennes, salle privée d’Antoine le pote millionnaire de Vera)
 
 ## Pro
 - Feldrise : ancienne entreprise, fermée en 2025 (fin de cycle assumée) ; apprentissages migrés vers Katalyx & Webisport
@@ -49,10 +49,10 @@ export const knowledgeBase = `
 - compose-daemon : socle Docker du lab
 
 ## Sports & culture (Passions)
-- Stade Rennais : suivi data/tactique, Roazhon quand possible, ferveur portable Sud/Suisse
-- Coupe du Monde 2026 : hype MAX "Vera-induced", calendrier mental groupes → finale, base Tessin en août
-- Ping-pong : uptime ON, spots Rennes / Aix / Nice / Locarno / outdoor Écosse
-- Variable Bretagne ~87 : rituels (beurre salé, playlist celtique, météo-as-identity), ancrage Rennes / Brocéliande
+- Stade Rennais : suivi tardif. Exception le 13 fév. au Tessin avec Vera et son père (fan de foot) : Rennes 3–1 PSG. Puis les 4 derniers de Ligue 1 2025–26 à partir du derby Rennes–Nantes (26 avr., 2–1), tous au Fox & Friends (Lyon 4–2, Paris FC 2–1, Marseille 3–1). Jusqu’à J34, C1 encore possible (3e jouable avec Lille et Lyon) — fini 6e, 59 pts, mêmes points que l’OM. Petite mention : finale C1 derrière le PSG (PSG 1–1 Arsenal, 4–3 t.a.b., 30 mai).
+- Coupe du Monde 2026 : premier Mondial vraiment regardé (25 matchs, 1 manqué — ouverture Mexique/Afrique du Sud, tenu franc-maçon). Driver : Vera connaissait les joueurs. Écrans : tout petit NOW (Louna, Qatar–Suisse), Hellfest (Portugal–RD Congo), canapé (dont Espagne–Cap-Vert), Fox & Friends à Rennes (France–Norvège, « meilleur bar de Rennes »), Delirium (Canada–Maroc + France–Paraguay le même jour), Roazhon’s Call à Paris (Airbnb au-dessus), Suisse–Argentine à 3h, finale derrière les Espagnols (Espagne 1–0 a.p. Argentine). Cap-Vert : on y a tous cru. Suisse : trop fière (sortie Colombie aux TAB). Pas un calendrier Webisport.
+- Ping-pong : uptime ON, 3 tables — camping Paimpont (chez Vera), PAM (asso de quartier, Rennes), salle de sport privée d’Antoine (pote millionnaire de Vera, le clou)
+- Variable Bretagne ~87 : rituels (beurre salé, météo-as-identity), ancrage Rennes / Brocéliande
 `.trim();
 
 export const suggestedQuestions = [

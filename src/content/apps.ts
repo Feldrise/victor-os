@@ -36,7 +36,7 @@ export const APPS: AppMeta[] = [
     icon: "⚽",
     accent: "var(--vos-success)",
     description: "Foot, Mondial, ping & Bretagne",
-    defaultSize: { width: 720, height: 540 },
+    defaultSize: { width: 760, height: 580 },
   },
   {
     id: "lab",
@@ -44,7 +44,7 @@ export const APPS: AppMeta[] = [
     shortName: "Labo",
     icon: "🍄",
     accent: "var(--vos-amber)",
-    description: "htop perso — fiches projets",
+    description: "htop perso — processus en cours",
     defaultSize: { width: 700, height: 540 },
   },
 ];

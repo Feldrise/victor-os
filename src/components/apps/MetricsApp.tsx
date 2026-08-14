@@ -5,10 +5,12 @@ import { AnimatePresence, motion } from "motion/react";
 import {
   bretagneGauge,
   getPassion,
-  sportsMetrics,
-  type Passion,
+  sportsDoors,
+  type PassionSpot,
   type Trend,
 } from "@/content/sports";
+import { WorldCupStudio } from "@/components/apps/WorldCupStudio";
+import { RennesLateRun } from "@/components/apps/RennesLateRun";
 
 type View = { kind: "overview" } | { kind: "detail"; id: string };
 
@@ -68,7 +70,7 @@ function Gauge({
         <path
           d="M 16 90 A 54 54 0 1 1 124 90"
           fill="none"
-          stroke="#2c3140"
+          stroke="var(--vos-border)"
           strokeWidth="10"
           strokeLinecap="round"
         />
@@ -137,10 +139,21 @@ export function MetricsApp() {
             exit={{ opacity: 0, x: 10 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
-            <DetailView
-              passion={selected}
-              onBack={() => setView({ kind: "overview" })}
-            />
+            {selected.id === "wc2026" && selected.wc ? (
+              <WorldCupStudio
+                passion={selected}
+                onBack={() => setView({ kind: "overview" })}
+              />
+            ) : selected.id === "rennes" && selected.rennes ? (
+              <RennesLateRun
+                passion={selected}
+                onBack={() => setView({ kind: "overview" })}
+              />
+            ) : (
+              <div className="flex h-full items-center justify-center p-6 text-sm text-[var(--vos-text-dim)]">
+                Rien à ouvrir ici.
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -149,6 +162,9 @@ export function MetricsApp() {
 }
 
 function Overview({ onOpen }: { onOpen: (id: string) => void }) {
+  const ping = getPassion("pingpong");
+  const bretagne = getPassion("bretagne");
+
   return (
     <>
       <header className="shrink-0 border-b border-[var(--vos-border)] bg-[var(--vos-bg-panel)] px-5 py-5">
@@ -159,14 +175,13 @@ function Overview({ onOpen }: { onOpen: (id: string) => void }) {
           Passions
         </h2>
         <p className="mt-1 max-w-md text-xs leading-relaxed text-[var(--vos-text-muted)]">
-          Foot, Mondial, ping-pong et racines — métriques du cœur, drill-down
-          autorisé.
+          Deux dossiers à ouvrir. Le ping-pong et la Bretagne tiennent ici.
         </p>
       </header>
 
       <div className="vos-scroll flex-1 overflow-y-auto p-4 sm:p-5">
         <div className="grid gap-3 sm:grid-cols-2">
-          {sportsMetrics.map((m, i) => (
+          {sportsDoors.map((m, i) => (
             <motion.button
               key={m.id}
               type="button"
@@ -214,307 +229,234 @@ function Overview({ onOpen }: { onOpen: (id: string) => void }) {
               </span>
             </motion.button>
           ))}
-
-          <motion.button
-            type="button"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.04 * sportsMetrics.length,
-              duration: 0.28,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            onClick={() => onOpen(bretagneGauge.id)}
-            className="group border border-[var(--vos-border)] bg-[var(--vos-bg)]/50 p-4 text-left transition-colors hover:bg-[var(--vos-bg-elevated)]/40 sm:col-span-2"
-          >
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div className="flex-1">
-                <p className="font-mono text-[10px] text-[var(--vos-text-dim)]">
-                  identity gauge
-                </p>
-                <h3
-                  className="font-[family-name:var(--font-instrument)] text-lg transition-colors group-hover:text-[var(--vos-amber)]"
-                  style={{ color: bretagneGauge.accent }}
-                >
-                  {bretagneGauge.label}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--vos-text-muted)]">
-                  {bretagneGauge.description}
-                </p>
-                <span className="mt-3 inline-block text-[11px] text-[var(--vos-text-dim)] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--vos-amber)]">
-                  Ouvrir →
-                </span>
-              </div>
-              <Gauge
-                value={bretagneGauge.value}
-                max={bretagneGauge.max}
-                label="celtic affinity"
-                accent={bretagneGauge.accent}
-              />
-            </div>
-          </motion.button>
         </div>
+
+        {ping && <PingPongTable ping={ping} />}
+        {bretagne && <BretagneGaugeBlock />}
       </div>
     </>
   );
 }
 
-function DetailView({
-  passion,
-  onBack,
+function PingPongTable({
+  ping,
 }: {
-  passion: Passion;
-  onBack: () => void;
+  ping: NonNullable<ReturnType<typeof getPassion>>;
+}) {
+  const spots = ping.spots ?? [];
+  const featured = spots.find((s) => s.featured);
+  const others = spots.filter((s) => !s.featured);
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.12, duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+      className="mt-8"
+    >
+      <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--vos-text-dim)] uppercase">
+        {ping.subtitle} · pas de dossier
+      </p>
+      <div className="mt-1 flex items-baseline justify-between gap-3">
+        <h3
+          className="font-[family-name:var(--font-instrument)] text-2xl leading-none"
+          style={{ color: ping.accent }}
+        >
+          {ping.title}
+        </h3>
+        <p className="font-mono text-[10px] text-[var(--vos-text-dim)]">
+          {ping.value} · {ping.unit}
+        </p>
+      </div>
+      <p className="mt-3 max-w-prose text-sm leading-relaxed text-[var(--vos-text-muted)]">
+        {ping.body}
+      </p>
+
+      <div className="relative mt-5 overflow-hidden">
+        <svg viewBox="0 0 360 128" className="h-auto w-full" aria-hidden>
+          <rect
+            x="18"
+            y="18"
+            width="324"
+            height="92"
+            rx="3"
+            fill="color-mix(in srgb, #1e5c3a 82%, var(--vos-bg))"
+            stroke={ping.accent}
+            strokeWidth="2.5"
+          />
+          <rect
+            x="26"
+            y="26"
+            width="308"
+            height="76"
+            fill="none"
+            stroke="rgba(255,255,255,0.35)"
+            strokeWidth="1.2"
+          />
+          <line
+            x1="180"
+            y1="26"
+            x2="180"
+            y2="102"
+            stroke="rgba(255,255,255,0.55)"
+            strokeWidth="1.6"
+          />
+          <rect
+            x="176"
+            y="22"
+            width="8"
+            height="84"
+            fill="rgba(244,239,230,0.18)"
+          />
+          <circle
+            cx="180"
+            cy="64"
+            r="7"
+            fill={ping.accent}
+            className="vos-uptime-pulse"
+          />
+        </svg>
+      </div>
+
+      {featured && (
+        <article
+          className="relative mt-4 overflow-hidden px-4 py-4"
+          style={{
+            border: `1px solid ${ping.accent}`,
+            background: `linear-gradient(135deg, color-mix(in srgb, ${ping.accent} 22%, var(--vos-bg)) 0%, var(--vos-bg) 62%)`,
+            boxShadow: `inset 4px 0 0 ${ping.accent}`,
+          }}
+        >
+          <p
+            className="font-mono text-[9px] tracking-[0.22em] uppercase"
+            style={{ color: ping.accent }}
+          >
+            Le clou · {featured.vibe}
+          </p>
+          <h4 className="mt-1 font-[family-name:var(--font-instrument)] text-xl leading-none text-[var(--vos-text)]">
+            {featured.city}
+          </h4>
+          <p className="mt-1 text-[12px] text-[var(--vos-text)]">
+            {featured.name}
+          </p>
+          <p className="mt-2 text-[12px] leading-relaxed text-[var(--vos-text-muted)]">
+            {featured.note}
+          </p>
+        </article>
+      )}
+
+      <ol className="mt-3 grid gap-3 sm:grid-cols-2">
+        {others.map((s) => (
+          <SpotChip key={s.id} spot={s} accent={ping.accent} />
+        ))}
+      </ol>
+    </motion.section>
+  );
+}
+
+function SpotChip({
+  spot,
+  accent,
+}: {
+  spot: PassionSpot;
+  accent: string;
 }) {
   return (
-    <>
-      <header className="shrink-0 border-b border-[var(--vos-border)] bg-[var(--vos-bg-panel)] px-5 py-4">
-        <button
-          type="button"
-          onClick={onBack}
-          className="mb-3 flex items-center gap-1.5 text-[11px] text-[var(--vos-text-muted)] transition-colors hover:text-[var(--vos-amber)]"
-        >
-          <span aria-hidden>←</span> Passions
-        </button>
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="font-mono text-[10px] text-[var(--vos-copper)]">
-              {passion.subtitle}
-            </p>
-            <h2
-              className="mt-1 font-[family-name:var(--font-instrument)] text-3xl leading-none"
-              style={{ color: passion.accent }}
-            >
-              {passion.title}
-            </h2>
-          </div>
-          <div className="text-right">
-            <p
-              className="font-[family-name:var(--font-instrument)] text-3xl"
-              style={{ color: passion.accent }}
-            >
-              {passion.value}
-            </p>
-            {passion.unit && (
-              <p className="font-mono text-[10px] text-[var(--vos-text-dim)]">
-                {passion.unit}
-              </p>
-            )}
-          </div>
-        </div>
-      </header>
-
-      <div className="vos-scroll flex-1 overflow-y-auto px-5 py-5">
-        <div className="mb-6">
-          <Sparkline
-            values={passion.series}
-            color={sparkColor(passion.trend)}
-          />
-        </div>
-
-        <p className="max-w-prose text-sm leading-relaxed text-[var(--vos-text)]/90">
-          {passion.body}
+    <li className="flex items-start gap-2 py-1">
+      <span
+        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
+        style={{ background: accent }}
+        aria-hidden
+      />
+      <div>
+        <p className="text-[12px] leading-snug text-[var(--vos-text)]">
+          {spot.city}
+          <span className="ml-1.5 font-mono text-[9px] tracking-wider text-[var(--vos-text-dim)] uppercase">
+            {spot.vibe}
+          </span>
         </p>
+        <p className="text-[11px] leading-snug text-[var(--vos-text-muted)]">
+          {spot.name}
+          {spot.note ? ` — ${spot.note}` : ""}
+        </p>
+      </div>
+    </li>
+  );
+}
 
-        {passion.metrics && passion.metrics.length > 0 && (
-          <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-y border-[var(--vos-border)] py-4 sm:grid-cols-4">
-            {passion.metrics.map((m) => (
+function BretagneGaugeBlock() {
+  const bretagne = getPassion("bretagne");
+  if (!bretagne) return null;
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.18, duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+      className="mt-10 border-t border-[var(--vos-border)] pt-7"
+    >
+      <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--vos-text-dim)] uppercase">
+        {bretagne.subtitle} · pas de dossier
+      </p>
+      <h3
+        className="mt-1 font-[family-name:var(--font-instrument)] text-2xl leading-none"
+        style={{ color: bretagne.accent }}
+      >
+        {bretagneGauge.label}
+      </h3>
+
+      <div className="mt-5 flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:gap-8">
+        <Gauge
+          value={bretagneGauge.value}
+          max={bretagneGauge.max}
+          label="plus loin → plus fort"
+          accent={bretagne.accent}
+        />
+        <div className="min-w-0 flex-1">
+          <p className="text-sm leading-relaxed text-[var(--vos-text-muted)]">
+            {bretagne.body}
+          </p>
+          <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+            {bretagne.metrics?.map((m) => (
               <div key={m.label}>
-                <dt className="font-mono text-[10px] text-[var(--vos-text-dim)]">
+                <dt className="font-mono text-[9px] tracking-wider text-[var(--vos-text-dim)] uppercase">
                   {m.label}
                 </dt>
                 <dd
-                  className="mt-1 font-[family-name:var(--font-instrument)] text-xl"
-                  style={{ color: passion.accent }}
+                  className="font-[family-name:var(--font-instrument)] text-lg leading-none"
+                  style={{ color: bretagne.accent }}
                 >
                   {m.value}
                 </dd>
               </div>
             ))}
           </dl>
-        )}
+        </div>
+      </div>
 
-        <ul className="mt-6 space-y-0 border-t border-[var(--vos-border)] pt-5">
-          <li className="mb-3 font-mono text-[10px] tracking-wider text-[var(--vos-text-dim)] uppercase">
-            Points clés
-          </li>
-          {passion.highlights.map((h, i) => (
-            <li
-              key={h}
-              className="flex gap-3 border-b border-[var(--vos-border-subtle)] py-3 last:border-b-0"
-            >
+      {bretagne.rituals && bretagne.rituals.length > 0 && (
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+          {bretagne.rituals.map((r) => (
+            <li key={r.id} className="relative pl-3">
               <span
-                className="font-mono text-[10px] tabular-nums"
-                style={{ color: passion.accent }}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="text-sm text-[var(--vos-text-muted)]">{h}</span>
+                className="absolute top-1.5 left-0 h-4 w-px"
+                style={{ background: bretagne.accent }}
+                aria-hidden
+              />
+              <p className="text-[12px] text-[var(--vos-text)]">{r.title}</p>
+              <p className="mt-0.5 text-[11px] leading-snug text-[var(--vos-text-muted)]">
+                {r.detail}
+              </p>
             </li>
           ))}
         </ul>
+      )}
 
-        {passion.matches && passion.matches.length > 0 && (
-          <section className="mt-8">
-            <h3
-              className="font-[family-name:var(--font-instrument)] text-xl"
-              style={{ color: passion.accent }}
-            >
-              Matchs mémorables
-            </h3>
-            <ul className="mt-4 space-y-0">
-              {passion.matches.map((m) => (
-                <li
-                  key={m.id}
-                  className="border-b border-[var(--vos-border-subtle)] py-3 last:border-b-0"
-                >
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <p className="text-sm text-[var(--vos-text)]">
-                      vs {m.opponent}{" "}
-                      <span style={{ color: passion.accent }}>{m.score}</span>
-                    </p>
-                    <p className="font-mono text-[10px] text-[var(--vos-copper)]">
-                      {m.date} · {m.competition}
-                    </p>
-                  </div>
-                  <p className="mt-1 text-sm text-[var(--vos-text-muted)]">
-                    {m.note}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {passion.wcGames && passion.wcGames.length > 0 && (
-          <section className="mt-8">
-            <h3
-              className="font-[family-name:var(--font-instrument)] text-xl"
-              style={{ color: passion.accent }}
-            >
-              Calendrier mental CdM
-            </h3>
-            <ul className="mt-4 space-y-0">
-              {passion.wcGames.map((g) => (
-                <li
-                  key={g.id}
-                  className="border-b border-[var(--vos-border-subtle)] py-3 last:border-b-0"
-                >
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <p className="text-sm text-[var(--vos-text)]">{g.matchup}</p>
-                    <p className="font-mono text-[10px] text-[var(--vos-copper)]">
-                      {g.date} · {g.stage}
-                    </p>
-                  </div>
-                  <p className="mt-1 text-sm text-[var(--vos-text-muted)]">
-                    {g.note}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {passion.spots && passion.spots.length > 0 && (
-          <section className="mt-8">
-            <h3
-              className="font-[family-name:var(--font-instrument)] text-xl"
-              style={{ color: passion.accent }}
-            >
-              Spots ping-pong
-            </h3>
-            <ul className="mt-4 space-y-0">
-              {passion.spots.map((s) => (
-                <li
-                  key={s.id}
-                  className="border-b border-[var(--vos-border-subtle)] py-3 last:border-b-0"
-                >
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <p className="text-sm text-[var(--vos-text)]">
-                      {s.name}{" "}
-                      <span className="font-mono text-[11px] text-[var(--vos-text-dim)]">
-                        · {s.city}
-                      </span>
-                    </p>
-                    <p
-                      className="font-mono text-[10px]"
-                      style={{ color: passion.accent }}
-                    >
-                      {s.vibe}
-                    </p>
-                  </div>
-                  <p className="mt-1 text-sm text-[var(--vos-text-muted)]">
-                    {s.note}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {passion.rituals && passion.rituals.length > 0 && (
-          <section className="mt-8">
-            <h3
-              className="font-[family-name:var(--font-instrument)] text-xl"
-              style={{ color: passion.accent }}
-            >
-              Rituels
-            </h3>
-            <ul className="mt-4 space-y-4">
-              {passion.rituals.map((r) => (
-                <li key={r.id} className="relative pl-4">
-                  <span
-                    className="absolute top-1.5 left-0 h-2 w-2 rounded-full"
-                    style={{ background: passion.accent }}
-                    aria-hidden
-                  />
-                  <p className="text-sm font-medium text-[var(--vos-text)]">
-                    {r.title}
-                  </p>
-                  <p className="mt-1 text-sm leading-relaxed text-[var(--vos-text-muted)]">
-                    {r.detail}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {passion.places && passion.places.length > 0 && (
-          <section className="mt-8">
-            <h3
-              className="font-[family-name:var(--font-instrument)] text-xl"
-              style={{ color: passion.accent }}
-            >
-              Lieux d’ancrage
-            </h3>
-            <ul className="mt-4 space-y-0">
-              {passion.places.map((p) => (
-                <li
-                  key={p.id}
-                  className="border-b border-[var(--vos-border-subtle)] py-3 last:border-b-0"
-                >
-                  <p className="text-sm text-[var(--vos-text)]">{p.name}</p>
-                  <p className="mt-1 text-sm text-[var(--vos-text-muted)]">
-                    {p.note}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {passion.id === "bretagne" && (
-          <div className="mt-8 flex justify-center border-t border-[var(--vos-border)] pt-6">
-            <Gauge
-              value={bretagneGauge.value}
-              max={bretagneGauge.max}
-              label="celtic affinity"
-              accent={passion.accent}
-            />
-          </div>
-        )}
-      </div>
-    </>
+      {bretagne.places && bretagne.places.length > 0 && (
+        <p className="mt-5 font-mono text-[10px] leading-relaxed tracking-wide text-[var(--vos-text-dim)]">
+          {bretagne.places.map((p) => p.name).join("  ·  ")}
+        </p>
+      )}
+    </motion.section>
   );
 }
