@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "./ThemeProvider";
+import { WallpaperPicker } from "./WallpaperPicker";
 
 export function MenuBar() {
   const [now, setNow] = useState(() => new Date());
@@ -34,6 +35,7 @@ export function MenuBar() {
         </span>
       </div>
       <div className="flex items-center gap-3 text-xs text-[var(--vos-muted)]">
+        <WallpaperPicker />
         <button
           type="button"
           onClick={toggleTheme}

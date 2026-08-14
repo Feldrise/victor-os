@@ -1,14 +1,23 @@
 "use client";
 
-/** Full-bleed photographic wallpaper with legibility veils for chrome. */
+import { useWallpaper } from "./WallpaperProvider";
+
+/** Full-bleed wallpaper with legibility veils; mature content stays blurred until consent. */
 export function WallpaperArt() {
+  const { wallpaper, wallpaperId, nsfwConsent } = useWallpaper();
+  const needsBlur = Boolean(wallpaper.mature) && !nsfwConsent;
+
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/media/os/wallpaper-retrouvailles.png"
+        key={wallpaperId}
+        src={wallpaper.src}
         alt=""
-        className="absolute inset-0 h-full w-full object-cover object-[center_35%]"
+        className={`absolute inset-0 h-full w-full object-cover transition-[filter,transform] duration-500 ${
+          needsBlur ? "scale-110 blur-2xl brightness-50" : ""
+        }`}
+        style={{ objectPosition: wallpaper.objectPosition ?? "center center" }}
         draggable={false}
       />
 

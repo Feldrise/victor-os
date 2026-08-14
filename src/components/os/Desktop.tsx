@@ -4,20 +4,24 @@ import { useEffect, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import { DesktopProvider, useDesktop } from "./DesktopContext";
 import { ThemeProvider } from "./ThemeProvider";
+import { WallpaperProvider, useWallpaper } from "./WallpaperProvider";
 import { MenuBar } from "./MenuBar";
 import { Dock } from "./Dock";
 import { WindowFrame } from "./WindowFrame";
 import { MobileLauncher } from "./MobileLauncher";
 import { BootSequence } from "./BootSequence";
 import { WallpaperArt } from "./WallpaperArt";
+import { WallpaperNsfwGate } from "./WallpaperNsfwGate";
 import { BotCompanion } from "./BotCompanion";
 import { AppIcon } from "./AppIcon";
 import { AppContent } from "@/components/apps/AppContent";
 import { ALL_APP_IDS } from "@/content/apps";
+import type { WallpaperId } from "@/content/wallpapers";
 import type { AppId, ThemeMode } from "@/content/types";
 
 function DesktopInner() {
   const { setIsMobile, isMobile, openApp } = useDesktop();
+  const { wallpaperId } = useWallpaper();
   const [booted, setBooted] = useState(false);
 
   useEffect(() => {
@@ -40,6 +44,7 @@ function DesktopInner() {
         }`}
       >
         <MenuBar />
+        <WallpaperNsfwGate />
 
         <div className="absolute inset-0">
           {!isMobile && (
@@ -70,16 +75,18 @@ function DesktopInner() {
                 ))}
               </div>
 
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                <div className="pointer-events-none select-none text-center opacity-[0.14]">
-                  <p className="font-[family-name:var(--font-instrument)] text-6xl text-white md:text-7xl">
-                    Retrouvailles
-                  </p>
-                  <p className="mt-2 text-sm tracking-[0.25em] text-white uppercase">
-                    Été 2026
-                  </p>
+              {wallpaperId === "retrouvailles" && (
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                  <div className="pointer-events-none select-none text-center opacity-[0.14]">
+                    <p className="font-[family-name:var(--font-instrument)] text-6xl text-white md:text-7xl">
+                      Retrouvailles
+                    </p>
+                    <p className="mt-2 text-sm tracking-[0.25em] text-white uppercase">
+                      Été 2026
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <AnimatePresence>
                 {ALL_APP_IDS.map((id) => (
@@ -101,12 +108,25 @@ function DesktopInner() {
   );
 }
 
-export function Desktop({ initialTheme = "dark" }: { initialTheme?: ThemeMode }) {
+export function Desktop({
+  initialTheme = "dark",
+  initialWallpaper = "koala",
+  initialNsfwConsent = false,
+}: {
+  initialTheme?: ThemeMode;
+  initialWallpaper?: WallpaperId;
+  initialNsfwConsent?: boolean;
+}) {
   return (
     <ThemeProvider initialTheme={initialTheme}>
-      <DesktopProvider>
-        <DesktopInner />
-      </DesktopProvider>
+      <WallpaperProvider
+        initialWallpaper={initialWallpaper}
+        initialNsfwConsent={initialNsfwConsent}
+      >
+        <DesktopProvider>
+          <DesktopInner />
+        </DesktopProvider>
+      </WallpaperProvider>
     </ThemeProvider>
   );
 }
