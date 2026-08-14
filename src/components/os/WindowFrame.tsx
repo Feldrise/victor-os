@@ -19,6 +19,7 @@ export function WindowFrame({ id, children }: Props) {
     windows,
     activeId,
     browserTarget,
+    galleryTarget,
     closeApp,
     minimizeApp,
     focusApp,
@@ -32,7 +33,9 @@ export function WindowFrame({ id, children }: Props) {
   const titleLabel =
     id === "browser" && browserTarget
       ? `Navigateur · ${browserTarget.title}`
-      : meta.name;
+      : id === "gallery" && galleryTarget
+        ? `Galerie · ${galleryTarget.album.title}`
+        : meta.name;
   const dragOffset = useRef({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
 
@@ -184,7 +187,9 @@ export function WindowFrame({ id, children }: Props) {
       </div>
       <div
         className={`min-h-0 flex-1 bg-[var(--vos-bg-content)] ${
-          id === "browser" ? "overflow-hidden" : "vos-scroll overflow-auto"
+          id === "browser" || id === "gallery"
+            ? "overflow-hidden"
+            : "vos-scroll overflow-auto"
         }`}
       >
         {children}

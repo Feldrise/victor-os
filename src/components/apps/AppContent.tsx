@@ -6,6 +6,7 @@ import { PatchVeraApp } from "@/components/apps/PatchVeraApp";
 import { NetworkMapApp } from "@/components/apps/NetworkMapApp";
 import { MetricsApp } from "@/components/apps/MetricsApp";
 import { LabApp } from "@/components/apps/LabApp";
+import { GalleryApp } from "@/components/apps/GalleryApp";
 import { SimulatedBrowser } from "@/components/apps/SimulatedBrowser";
 import { useDesktop } from "@/components/os/DesktopContext";
 
@@ -21,6 +22,8 @@ export function AppContent({ id }: { id: AppId }) {
       return <MetricsApp />;
     case "lab":
       return <LabApp />;
+    case "gallery":
+      return <GalleryApp />;
     case "browser":
       return <BrowserAppContent />;
     default:

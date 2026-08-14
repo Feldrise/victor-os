@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { PhotoBlock } from "@/components/media/PhotoBlock";
+import { albumForVeraModule } from "@/content/gallery";
 import {
   getVeraModule,
   veraModules,
@@ -11,7 +13,6 @@ import {
   type VeraFilm,
   type VeraFilmVerdictTone,
   type VeraModule,
-  type VeraPhoto,
   type VeraStatus,
 } from "@/content/vera";
 
@@ -31,43 +32,6 @@ const verdictTone: Record<VeraFilmVerdictTone, string> = {
   essential: "bg-[#1a2a3a] text-[#8ab4d4] border-[#3a5a7a]",
   classic: "bg-[#2a2438] text-[#c4b0e0] border-[#5a4a7a]",
 };
-
-function PhotoBlock({
-  photo,
-  accent,
-}: {
-  photo: VeraPhoto;
-  accent: string;
-}) {
-  const showImg = photo.src && !photo.placeholder;
-
-  return (
-    <figure className="relative aspect-[3/2] overflow-hidden border border-[var(--vos-border)]">
-      {showImg ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={photo.src}
-          alt={photo.caption}
-          className="h-full w-full object-cover"
-        />
-      ) : (
-        <div
-          className="flex h-full w-full flex-col justify-end p-3"
-          style={{
-            background: `linear-gradient(135deg, ${accent}40, transparent 55%), radial-gradient(circle at 25% 75%, ${accent}28, var(--vos-bg) 70%)`,
-          }}
-        >
-          <span className="font-mono text-[9px] tracking-wider text-[var(--vos-text-dim)] uppercase">
-            placeholder
-          </span>
-        </div>
-      )}
-      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 pt-8 pb-2 text-[11px] leading-snug text-[var(--vos-text)]/90">
-        {photo.caption}
-      </figcaption>
-    </figure>
-  );
-}
 
 function PosterCard({ film }: { film: VeraFilm }) {
   return (
@@ -321,6 +285,7 @@ function DetailView({
   onBack: () => void;
 }) {
   const isCinema = module.id === "cinema";
+  const album = albumForVeraModule(module);
 
   return (
     <>
@@ -406,6 +371,7 @@ function DetailView({
                   key={photo.id}
                   photo={photo}
                   accent={module.accent}
+                  album={album}
                 />
               ))}
             </div>

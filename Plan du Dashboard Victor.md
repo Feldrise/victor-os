@@ -38,7 +38,7 @@ Cartographie des déplacements stratégiques, professionnels et récréatifs des
 | Région / Pays | Contexte du Déplacement | Détails Temporels |
 | :---- | :---- | :---- |
 | Tessin / Curio (Suisse) | Deux séjours famille Vera : carnaval (Curio + Bellinzone) puis été caniculaire + 1er août à Lugano. | 14–21 fév. & 28 juil.–11 août 2026 |
-| Écosse / Montrose | Hub à Montrose, raids Édimbourg / Aberdeen / paysages ; pubs & billard ; Vera dès le 12 mars. | 7–17 mars 2026 |
+| Écosse / Montrose | Hub à Montrose, raids Édimbourg / Aberdeen / paysages ; pubs & billard ; Vera dès le 12 mars. | 7–17 mars 2025 |
 | Paris (France) | Semaine avec Vera : Roazhon’s Call / CdM, Fontainebleau, Atelier des Lumières, Dior, 14 juillet, Odyssey 70 mm. | 9–16 juillet 2026 |
 | Adriatique (Italie) | Court circuit Bologne → Cattolica (Caparezza) → Rimini/Riccione → train retour Suisse (retards). | 17–23 juillet 2026 |
 | Sud de la France | Corridor pro récurrent Katalyx & Webisport (Aix / Nice / Antibes) — pin carte, sans page détail. | Déplacements récurrents |

@@ -6,7 +6,7 @@ import { useDesktop } from "./DesktopContext";
 import { AppIcon } from "./AppIcon";
 
 export function Dock() {
-  const { openApp, windows, activeId, isMobile, mobileApp, browserTarget } =
+  const { openApp, windows, activeId, isMobile, mobileApp, browserTarget, galleryTarget } =
     useDesktop();
 
   if (isMobile) return null;
@@ -25,6 +25,16 @@ export function Dock() {
           const win = windows.find((w) => w.id === app.id);
           const isOpen = win?.open && !win.minimized;
           const isActive = activeId === app.id || mobileApp === app.id;
+          const title =
+            app.id === "browser" && browserTarget
+              ? browserTarget.title
+              : app.id === "gallery" && galleryTarget
+                ? galleryTarget.album.title
+                : app.name;
+          const label =
+            app.id === "browser" && browserTarget
+              ? browserTarget.title
+              : app.shortName;
 
           return (
             <motion.button
@@ -34,11 +44,7 @@ export function Dock() {
               whileTap={{ scale: 0.94 }}
               onClick={() => openApp(app.id)}
               className="group relative flex w-14 flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[var(--vos-text)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--vos-amber)]"
-              title={
-                app.id === "browser" && browserTarget
-                  ? browserTarget.title
-                  : app.name
-              }
+              title={title}
             >
               <span
                 className={`relative transition-[filter] ${
@@ -53,9 +59,7 @@ export function Dock() {
                 <AppIcon id={app.id} size="md" />
               </span>
               <span className="max-w-full truncate text-[9px] text-[var(--vos-dim)] group-hover:text-[var(--vos-muted)]">
-                {app.id === "browser" && browserTarget
-                  ? browserTarget.title
-                  : app.shortName}
+                {label}
               </span>
               {(isOpen || win?.minimized) && (
                 <span

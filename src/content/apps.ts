@@ -47,6 +47,15 @@ export const APPS: AppMeta[] = [
     description: "htop perso — processus en cours",
     defaultSize: { width: 700, height: 540 },
   },
+  {
+    id: "gallery",
+    name: "Galerie",
+    shortName: "Photos",
+    icon: "▣",
+    accent: "var(--vos-copper)",
+    description: "Albums photos — Voyages & Vera",
+    defaultSize: { width: 820, height: 600 },
+  },
 ];
 
 export const BROWSER_APP: AppMeta = {
@@ -61,7 +70,7 @@ export const BROWSER_APP: AppMeta = {
 
 export const APP_BY_ID = Object.fromEntries(
   [...APPS, BROWSER_APP].map((app) => [app.id, app]),
-) as Record<(typeof APPS)[number]["id"] | "browser", AppMeta>;
+) as Record<AppMeta["id"], AppMeta>;
 
 export const MIN_WINDOW = { width: 340, height: 260 };
 

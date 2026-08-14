@@ -4,6 +4,7 @@ export type AppId =
   | "travel"
   | "metrics"
   | "lab"
+  | "gallery"
   | "browser";
 
 export type ThemeMode = "dark" | "light";
@@ -38,6 +39,25 @@ export type BrowserTarget = {
   url: string;
   accent: string;
   embedAllowed?: boolean;
+};
+
+export type GalleryPhoto = {
+  id: string;
+  src: string;
+  caption: string;
+  placeholder?: boolean;
+};
+
+export type GalleryAlbum = {
+  id: string;
+  title: string;
+  source: "travel" | "vera";
+  photos: GalleryPhoto[];
+};
+
+export type GalleryTarget = {
+  album: GalleryAlbum;
+  index: number;
 };
 
 export type ResizeEdge =

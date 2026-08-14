@@ -14,6 +14,7 @@ export function MobileLauncher() {
     setMobileApp,
     closeApp,
     browserTarget,
+    galleryTarget,
   } = useDesktop();
 
   if (!isMobile) return null;
@@ -23,7 +24,9 @@ export function MobileLauncher() {
     const title =
       mobileApp === "browser" && browserTarget
         ? browserTarget.title
-        : meta.name;
+        : mobileApp === "gallery" && galleryTarget
+          ? galleryTarget.album.title
+          : meta.name;
     return (
       <div className="absolute inset-x-0 top-10 bottom-0 z-40 flex flex-col bg-[var(--vos-bg)] pb-24">
         <div className="flex h-12 shrink-0 items-center gap-3 border-b border-[var(--vos-border)] bg-[var(--vos-elevated)] px-3">
@@ -41,7 +44,9 @@ export function MobileLauncher() {
         </div>
         <div
           className={`min-h-0 flex-1 ${
-            mobileApp === "browser" ? "overflow-hidden" : "vos-scroll overflow-auto"
+            mobileApp === "browser" || mobileApp === "gallery"
+              ? "overflow-hidden"
+              : "vos-scroll overflow-auto"
           }`}
         >
           <AppContent id={mobileApp} />

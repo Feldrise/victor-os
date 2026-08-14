@@ -1,12 +1,17 @@
 "use client";
 
+import { PhotoBlock } from "@/components/media/PhotoBlock";
+import {
+  albumForChapter,
+  albumForTrip,
+} from "@/content/gallery";
 import type {
   JournalEntry,
   TravelChapter,
   TravelKind,
-  TravelPhoto,
   TravelTrip,
 } from "@/content/travel";
+import type { GalleryAlbum } from "@/content/types";
 
 const kindLabel: Record<TravelKind, string> = {
   leisure: "Loisir",
@@ -14,49 +19,6 @@ const kindLabel: Record<TravelKind, string> = {
   music: "Musique",
   family: "Famille",
 };
-
-function PhotoBlock({
-  photo,
-  accent,
-  tall,
-}: {
-  photo: TravelPhoto;
-  accent: string;
-  tall?: boolean;
-}) {
-  const showImg = photo.src && !photo.placeholder;
-
-  return (
-    <figure
-      className={`relative overflow-hidden border border-[var(--vos-border)] ${
-        tall ? "aspect-[4/3]" : "aspect-[3/2]"
-      }`}
-    >
-      {showImg ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={photo.src}
-          alt={photo.caption}
-          className="h-full w-full object-cover"
-        />
-      ) : (
-        <div
-          className="flex h-full w-full flex-col justify-end p-3"
-          style={{
-            background: `linear-gradient(135deg, ${accent}40, transparent 55%), radial-gradient(circle at 25% 75%, ${accent}28, var(--vos-bg) 70%)`,
-          }}
-        >
-          <span className="font-mono text-[9px] tracking-wider text-[var(--vos-text-dim)] uppercase">
-            placeholder
-          </span>
-        </div>
-      )}
-      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 pt-8 pb-2 text-[11px] leading-snug text-[var(--vos-text)]/90">
-        {photo.caption}
-      </figcaption>
-    </figure>
-  );
-}
 
 function Highlights({
   items,
@@ -93,9 +55,11 @@ function Highlights({
 function JournalList({
   entries,
   accent,
+  album,
 }: {
   entries: JournalEntry[];
   accent: string;
+  album: GalleryAlbum;
 }) {
   const journalSorted = [...entries].sort((a, b) =>
     a.date.localeCompare(b.date),
@@ -125,7 +89,12 @@ function JournalList({
           {entry.photos && entry.photos.length > 0 && (
             <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {entry.photos.map((photo) => (
-                <PhotoBlock key={photo.id} photo={photo} accent={accent} />
+                <PhotoBlock
+                  key={photo.id}
+                  photo={photo}
+                  accent={accent}
+                  album={album}
+                />
               ))}
             </div>
           )}
@@ -137,18 +106,21 @@ function JournalList({
 
 function ChapterBlock({
   chapter,
+  trip,
   accent,
   index,
   unit,
   layout,
 }: {
   chapter: TravelChapter;
+  trip: TravelTrip;
   accent: string;
   index: number;
   unit: string;
   layout: "linear" | "constellation";
 }) {
   const gallery = chapter.gallery ?? [];
+  const album = albumForChapter(trip, chapter);
 
   return (
     <section className="mt-12 border-t border-[var(--vos-border)] pt-10 first:mt-10">
@@ -172,7 +144,12 @@ function ChapterBlock({
 
       {chapter.cover && (
         <div className="mt-6 max-w-xl">
-          <PhotoBlock photo={chapter.cover} accent={accent} tall />
+          <PhotoBlock
+            photo={chapter.cover}
+            accent={accent}
+            tall
+            album={album}
+          />
         </div>
       )}
 
@@ -183,7 +160,12 @@ function ChapterBlock({
       {gallery.length > 0 && (
         <div className="mt-5 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
           {gallery.map((photo) => (
-            <PhotoBlock key={photo.id} photo={photo} accent={accent} />
+            <PhotoBlock
+              key={photo.id}
+              photo={photo}
+              accent={accent}
+              album={album}
+            />
           ))}
         </div>
       )}
@@ -195,7 +177,11 @@ function ChapterBlock({
           <h4 className="font-mono text-[10px] tracking-wider text-[var(--vos-text-dim)] uppercase">
             Carnet
           </h4>
-          <JournalList entries={chapter.journal} accent={accent} />
+          <JournalList
+            entries={chapter.journal}
+            accent={accent}
+            album={album}
+          />
         </div>
       )}
     </section>
@@ -213,6 +199,7 @@ export function TravelDetail({
   const hasChapters = chapters.length > 0;
   const unit = trip.chapterUnit ?? "Séjour";
   const layout = trip.chapterLayout ?? "linear";
+  const tripAlbum = albumForTrip(trip);
 
   return (
     <>
@@ -251,7 +238,12 @@ export function TravelDetail({
       <div className="vos-scroll flex-1 overflow-y-auto px-5 py-5">
         {trip.cover && (
           <div className="mb-6 max-w-xl">
-            <PhotoBlock photo={trip.cover} accent={trip.accent} tall />
+            <PhotoBlock
+              photo={trip.cover}
+              accent={trip.accent}
+              tall
+              album={tripAlbum}
+            />
           </div>
         )}
 
@@ -274,6 +266,7 @@ export function TravelDetail({
               <ChapterBlock
                 key={chapter.id}
                 chapter={chapter}
+                trip={trip}
                 accent={trip.accent}
                 index={i}
                 unit={unit}
@@ -292,7 +285,11 @@ export function TravelDetail({
             <p className="mt-1 text-xs text-[var(--vos-text-muted)]">
               Entrées de voyage.
             </p>
-            <JournalList entries={trip.journal} accent={trip.accent} />
+            <JournalList
+              entries={trip.journal}
+              accent={trip.accent}
+              album={tripAlbum}
+            />
           </section>
         )}
       </div>

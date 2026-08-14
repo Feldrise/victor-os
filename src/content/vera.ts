@@ -69,12 +69,12 @@ export const veraModules: VeraModule[] = [
     status: "applied",
     accent: "#e89a9a",
     summary:
-      "Vera, née en Suisse et élevée à Curio (Tessin). Rencontre autour de l’IA, première balade, premiers bisous le 20 mars 2026 — mode couple APPLIED.",
-    body: "Vera est née en Suisse et a grandi dans un tout petit patelin du Tessin : Curio. Elle connaît donc très bien ce que c’est que l’indépendantisme — et le goût d’un village où tout le monde se croise. On s’est rencontrés à une réunion un peu complotiste autour de l’IA. Très vite, dès la deuxième, j’ai appris qu’elle était guide nature (balades en forêt). L’invitation à marcher n’a pas traîné. Il nous a fallu deux balades pour le premier bisou — le 20 mars 2026. Aujourd’hui le quotidien est chargé : voyages, deux calendriers entrepreneuriaux, les cours… mais on s’amuse à fond, et on s’aime énormément.",
+      "Vera, née en Suisse et élevée à Curio (Tessin). Rencontre autour de l’IA, première balade, premiers bisous le 20 mars 2025 — mode couple APPLIED.",
+    body: "Vera est née en Suisse et a grandi dans un tout petit patelin du Tessin : Curio. Elle connaît donc très bien ce que c’est que l’indépendantisme — et le goût d’un village où tout le monde se croise. On s’est rencontrés à une réunion un peu complotiste autour de l’IA. Très vite, dès la deuxième, j’ai appris qu’elle était guide nature (balades en forêt). L’invitation à marcher n’a pas traîné. Il nous a fallu deux balades pour le premier bisou — le 20 mars 2025. Aujourd’hui le quotidien est chargé : voyages, deux calendriers entrepreneuriaux, les cours… mais on s’amuse à fond, et on s’aime énormément.",
     highlights: [
       "Curio (Tessin) — village, lac, indépendantisme local inclus",
       "Meet-cute IA → guide nature → forest.walk()",
-      "Premier bisou le 20 mars 2026 (après deux balades)",
+      "Premier bisou le 20 mars 2025 (après deux balades)",
       "Quotidien dense : voyages, business, cours — uptime couple 100%",
     ],
     logLines: [
