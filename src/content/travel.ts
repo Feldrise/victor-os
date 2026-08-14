@@ -378,8 +378,8 @@ export const travelTrips: TravelTrip[] = [
     name: "Clisson",
     region: "Hellfest",
     summary:
-      "Pèlerinage musical au Hellfest — weekend Clisson, décibels validés, pas de journal photo cette année.",
-    body: "Clisson en juin : boue ou poussière selon l’année, mais toujours le même rituel — planning de scènes, file pour les bières, et cette fatigue heureuse du dimanche soir. Hellfest reste le marqueur musical de l’année.",
+      "Pèlerinage musical au Hellfest — weekend Clisson sous un vrai ciel bleu, pas de journal photo cette année.",
+    body: "Clisson en juin : cette année, il a fait très beau — pas la boue, le soleil. Même rituel sinon : planning de scènes, file pour les bières, fatigue heureuse du dimanche soir. Concerts notables : Iron Maiden, Resolve, The Offspring, Bad Omens, Alice Cooper, Ultra Vomit, Pretty Reckless. Hellfest reste le marqueur musical de l’année.",
     timing: "Juin 2026",
     startDate: "2026-06-19",
     endDate: "2026-06-22",
@@ -389,9 +389,9 @@ export const travelTrips: TravelTrip[] = [
     kind: "music",
     hasDetail: false,
     highlights: [
-      "Weekend festival · Clisson",
-      "Scènes principales + découvertes late-night",
-      "Monitoring auditif : pic validé",
+      "Weekend festival · Clisson — très beau temps",
+      "Iron Maiden, Resolve, The Offspring, Bad Omens",
+      "Alice Cooper, Ultra Vomit, Pretty Reckless",
     ],
     journal: [],
   },

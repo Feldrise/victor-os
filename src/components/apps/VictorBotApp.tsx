@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { suggestedQuestions } from "@/content/knowledge";
+import { BotMarkdown } from "@/components/apps/BotMarkdown";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -120,7 +121,11 @@ export function VictorBotApp({ compact = false }: Props) {
                 Victor-Bot
               </p>
             )}
-            <p className="whitespace-pre-wrap">{m.content}</p>
+            {m.role === "assistant" ? (
+              <BotMarkdown text={m.content} />
+            ) : (
+              <p className="whitespace-pre-wrap">{m.content}</p>
+            )}
           </div>
         ))}
         {loading && (
