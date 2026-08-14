@@ -1,0 +1,115 @@
+name: Déployer Victor OS sur VPS (production)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: victor-os
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Récupération du code source
+        uses: actions/checkout@v4
+
+      - name: Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Conversion du nom en minuscules
+        id: lowercase
+        run: |
+          echo "repo_owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo "image_name=$(echo ${{ env.IMAGE_NAME }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
+      - name: Connexion au registre de conteneurs
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_TOKEN }}
+
+      - name: Extraction des métadonnées
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ steps.lowercase.outputs.repo_owner }}/${{ steps.lowercase.outputs.image_name }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Construction et publication de l'image Docker
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./docker/Dockerfile.prod
+          target: runner
+          push: true
+          no-cache: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Déploiement sur VPS
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script: |
+            cd /opt/victor-os
+
+            curl -fsSL -o docker-compose.prod.yml \
+              -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+              https://raw.githubusercontent.com/${{ github.repository }}/main/docker/docker-compose.prod.yml
+
+            echo "${{ secrets.GH_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+
+            sed -i "s|image: ghcr.io/.*/victor-os:.*|image: ${{ env.REGISTRY }}/${{ steps.lowercase.outputs.repo_owner }}/${{ steps.lowercase.outputs.image_name }}:latest|g" docker-compose.prod.yml
+            sed -i "s|ANTHROPIC_API_KEY_PLACEHOLDER|${{ secrets.ANTHROPIC_API_KEY }}|g" docker-compose.prod.yml
+
+            echo "✅ docker-compose.prod.yml mis à jour avec les secrets attendus par victor-os."
+
+            docker compose -f docker-compose.prod.yml pull victor-os
+
+            echo "🚀 Déploiement Victor OS..."
+            docker compose -f docker-compose.prod.yml up -d
+
+            docker image prune -f
+
+            echo "🏥 Vérification..."
+            sleep 20
+
+            if docker compose -f docker-compose.prod.yml ps | grep -q "victor-os.*Up"; then
+              echo "✅ victor-os est démarré."
+
+              if command -v curl &> /dev/null; then
+                if curl -fsS http://localhost:3006/ > /dev/null 2>&1; then
+                  echo "✅ Réponse HTTP sur le port 3006"
+                else
+                  echo "⚠️ Conteneur Up mais HTTP pas encore OK (démarrage ou proxy devant le port)"
+                fi
+              fi
+            else
+              echo "❌ Déploiement en échec"
+              docker compose -f docker-compose.prod.yml logs victor-os
+              exit 1
+            fi
+
+      - name: Notification du statut de déploiement
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ Déploiement victor-os réussi."
+          else
+            echo "❌ Échec du déploiement victor-os."
+          fi

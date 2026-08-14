@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+*.md
+.DS_Store
+npm-debug.log*
+.eslintcache
+coverage
+.github
+docker
+Exemple docker
+Exemple .github

@@ -27,16 +27,32 @@ Ouvre [http://localhost:3000](http://localhost:3000).
 
 Sans cette clé, le reste du dashboard fonctionne ; seul le chat renvoie une erreur 503 claire.
 
-## Déploiement (Vercel ou autre)
-
-1. Connecte le repo / déploie le dossier
-2. Ajoute `ANTHROPIC_API_KEY` dans les env vars de production
-3. Build command : `npm run build`
-4. Output : Next.js standard
+## Docker (local)
 
 ```bash
-npm run build && npm start
+# Depuis la racine du repo, avec ANTHROPIC_API_KEY dans l’environnement
+export ANTHROPIC_API_KEY=…
+docker compose -f docker/docker-compose.yml up --build
 ```
+
+L’app écoute sur [http://localhost:3000](http://localhost:3000).
+
+## Déploiement (VPS via GitHub Actions)
+
+Un push sur `main` (ou un lancement manuel du workflow) construit l’image, la publie sur GHCR, puis la déploie en SSH sur le VPS (`/opt/victor-os`, port hôte **3006**).
+
+Secrets GitHub à configurer (`Settings → Secrets and variables → Actions`) :
+
+| Secret | Description |
+|--------|-------------|
+| `GH_TOKEN` | PAT GitHub avec `read:packages` / `write:packages` (login GHCR) |
+| `VPS_HOST` | IP ou hostname du VPS |
+| `VPS_USERNAME` | Utilisateur SSH |
+| `VPS_SSH_KEY` | Clé privée SSH |
+| `VPS_PORT` | Port SSH (optionnel, défaut `22`) |
+| `ANTHROPIC_API_KEY` | Clé API Anthropic pour Victor-Bot |
+
+Le VPS doit avoir Docker + Docker Compose, et le compte GitHub doit pouvoir pousser `ghcr.io/feldrise/victor-os`.
 
 ## Médias
 
