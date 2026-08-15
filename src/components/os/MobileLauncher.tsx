@@ -57,10 +57,10 @@ export function MobileLauncher() {
 
   return (
     <div className="absolute inset-x-0 top-10 bottom-0 z-30 overflow-auto px-4 py-6 pb-28">
-      <p className="mb-1 font-[family-name:var(--font-instrument)] text-3xl text-[var(--vos-text)]">
+      <p className="mb-1 font-[family-name:var(--font-instrument)] text-3xl text-[var(--vos-text)] drop-shadow-sm">
         Explore
       </p>
-      <p className="mb-6 text-sm text-[var(--vos-muted)]">
+      <p className="mb-6 text-sm text-[var(--vos-muted)] drop-shadow-sm">
         Choisis une pièce de l&apos;année — le bot reste en bas à droite.
       </p>
       <div className="grid grid-cols-2 gap-3">
@@ -72,7 +72,7 @@ export function MobileLauncher() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
             onClick={() => openApp(app.id)}
-            className="flex flex-col items-start gap-2 rounded-2xl border border-[var(--vos-border)] bg-[var(--vos-panel)] p-4 text-left shadow-lg"
+            className="flex flex-col items-start gap-2 rounded-2xl border border-[var(--vos-border)] bg-[var(--vos-bg-panel)] p-4 text-left shadow-lg ring-1 ring-black/20"
           >
             <AppIcon id={app.id} size="lg" />
             <span className="text-sm text-[var(--vos-text)]">{app.shortName}</span>

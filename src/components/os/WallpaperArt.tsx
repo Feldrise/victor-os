@@ -39,8 +39,11 @@ export function WallpaperArt() {
         }}
       />
 
-      {/* Subtle side darken so shortcuts pop */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent" />
+      {/* Mobile: stronger full-bleed veil so launcher tiles stay readable */}
+      <div className="absolute inset-0 bg-[color-mix(in_srgb,var(--vos-bg)_42%,transparent)] md:bg-transparent" />
+
+      {/* Subtle side darken so shortcuts pop (desktop icons) */}
+      <div className="absolute inset-0 hidden bg-gradient-to-r from-black/25 via-transparent to-transparent md:block" />
     </div>
   );
 }

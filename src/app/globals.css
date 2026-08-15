@@ -8,6 +8,10 @@
   --vos-bg-window: rgba(20, 19, 17, 0.97);
   --vos-bg-content: #161512;
   --vos-bg-panel: #24221e;
+  /* Short aliases used by UI chrome (must resolve — otherwise bg is transparent) */
+  --vos-elevated: var(--vos-bg-elevated);
+  --vos-window: var(--vos-bg-window);
+  --vos-panel: var(--vos-bg-panel);
   --vos-border: rgba(232, 196, 150, 0.18);
   --vos-border-subtle: rgba(232, 196, 150, 0.08);
   --vos-amber: #e8b86a;
@@ -43,6 +47,9 @@
   --vos-bg-window: rgba(248, 246, 243, 0.98);
   --vos-bg-content: #f7f5f2;
   --vos-bg-panel: #ddd9d3;
+  --vos-elevated: var(--vos-bg-elevated);
+  --vos-window: var(--vos-bg-window);
+  --vos-panel: var(--vos-bg-panel);
   --vos-border: rgba(60, 50, 40, 0.14);
   --vos-border-subtle: rgba(60, 50, 40, 0.08);
   --vos-amber: #b87830;
