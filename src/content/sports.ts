@@ -326,7 +326,7 @@ export const passions: Passion[] = [
           title: "Signal perdu",
           screen: "hors antenne",
           place: "Tenue",
-          body: "Ouverture Mexique–Afrique du Sud : ratée. J’étais en tenu — franc-maçon. Le Mondial a commencé sans moi.",
+          body: "Ouverture Mexique–Afrique du Sud : ratée. J’étais en tenu avec ma \"secte\" (😉). Le Mondial a commencé sans moi.",
           accent: "#8a8078",
           matches: [
             {
