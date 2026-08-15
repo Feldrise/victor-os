@@ -16,6 +16,7 @@ const identityBrief = `
 - Stack perso : Linux, Docker Compose, i3wm, expérimentations LLM locaux
 - Apps du dashboard : Pro (Feldrise / Katalyx / Webisport / Ynov), Vera, Voyages, Passions (Rennes, Mondial, ping, Bretagne), Labo
 - Mascotte officieuse du couple : un koala en peluche (voyages, photos, fond d'écran)
+- Spider-Man préférés : les dessins animés avec Miles Morales (pas les live-action)
 `.trim();
 
 const discreetNote = `

@@ -9,4 +9,5 @@ export const suggestedQuestions = [
   "C'était comment le Mondial ?",
   "Tu fais toujours du ping-pong ?",
   "C'est quoi ton app mycologie ?",
+  "C'est quoi ton Spider-Man préféré ?",
 ];
